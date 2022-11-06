@@ -124,22 +124,35 @@ f7112 = f712.add_node("f7112")
 # print(f"{f72.get_max_depth()=}, should be 1")
 # print(f"{f7.get_max_depth()=}, should be 4")
 
-molecule_grid = [["molecule"] + [""] * 8]
+# molecule_grid = [["molecule"] + [""] * 8]
+molecule_grid = [["O"] + [""] * 8]
 print(f"{molecule_grid=}")
 
-f1_grid = [["f1"], [""], [""]]
-f2_grid = [["f2", "", "", ""], ["f21", "f22", "", "f23"], ["", "f221", "f222", ""]]
-f3_grid = [["f3"], [""], [""]]
-f4_grid = [["f4", ""], ["f41", "f42"], ["", "", ""]]
+# f1_grid = [["f1"], [""], [""]]
+# f2_grid = [["f2", "", "", ""], ["f21", "f22", "", "f23"], ["", "f221", "f222", ""]]
+# f3_grid = [["f3"], [""], [""]]
+# f4_grid = [["f4", ""], ["f41", "f42"], ["", "", ""]]
+f1_grid = [["C"], [""], [""]]
+f2_grid = [
+    ["CC", "", "", ""],
+    ["CCN", "CCNN", "", "CCNNN"],
+    ["", "CCNNO", "CCNNOO", ""],
+]
+f3_grid = [["CCC"], [""], [""]]
+f4_grid = [["CCCC", ""], ["CCCCN", "CCCCNN"], ["", "", ""]]
 
 grid = list(zip(f1_grid, f2_grid, f3_grid, f4_grid))
 print(f"{grid=}")
 
 print("grid rows:")
 for row in grid:
-    print(row)
     # Remove tuple, flatten into single list
+    flat_row = [item for sublist in row for item in sublist]
+    molecule_grid.append(flat_row)
+    # print(f"{flat_row=}")
 
-molecule_grid = molecule_grid + grid
+# molecule_grid = molecule_grid + grid
 
-print(f"{molecule_grid=}")
+molecule_grid_flat = [item for sublist in molecule_grid for item in sublist]
+
+print(f"{molecule_grid_flat=}")
