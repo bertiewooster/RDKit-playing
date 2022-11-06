@@ -37,6 +37,8 @@ from rdkit.Chem import Draw, Recap
 
 
 class NonBinTree:
+    """Adapted from https://stackoverflow.com/questions/60579330/non-binary-tree-data-structure-in-python#60579464"""
+
     def __init__(self, val):
         self.val = val
         self.nodes = []
@@ -49,15 +51,32 @@ class NonBinTree:
         return f"NonBinTree({self.val}): {self.nodes}"
 
     def get_ncols(self):
-        ncols = 0
+        self.ncols = 0
         if len(self.nodes) > 0:
-            # for node_counter in range(len(self.nodes)):
-            #     ncols += self.get_ncols(self.nodes[node_counter])
+            # If there are nodes under this one, call get_ncols on them recursively
             for node in self.nodes:
-                ncols += node.get_ncols()
+                self.ncols += node.get_ncols()
         else:
-            ncols += 1
-        return ncols
+            # If there are no nodes under this one, add 1 for this node
+            self.ncols += 1
+        return self.ncols
+
+    def get_max_depth(self):
+        max_depth = 0
+        if len(self.nodes) > 0:
+            for node in self.nodes:
+                this_depth = node.get_max_depth()
+                max_depth = max(this_depth + 1, max_depth)
+        else:
+            max_depth = max(1, max_depth)
+        self.max_depth = max_depth
+        return self.max_depth
+
+    def get_grid(self):
+        self.get_ncols()
+        # Create top row: Molecule, then the rest of columns are blank (empty strings)
+        grid = [self.val] + [""] * (self.ncols - 1)
+        return grid
 
 
 root = NonBinTree("cisapride")
@@ -75,7 +94,31 @@ f5 = root.add_node("f5")
 f6 = root.add_node("f6")
 f61 = f6.add_node("f61")
 f62 = f6.add_node("f62")
+
+# Adding for debugging--not real for cisapride
+f7 = root.add_node("f7")
+f71 = f7.add_node("f71")
+f72 = f7.add_node("f71")
+f711 = f71.add_node("f711")
+f712 = f71.add_node("f712")
+f7111 = f711.add_node("f7111")
+f7112 = f712.add_node("f7112")
+
 print(root)
-print(f"{f1.get_ncols()=}")
-print(f"{f2.get_ncols()=}")
-print(f"{root.get_ncols()=}")
+# print(f"{f1.get_ncols()=}")
+# print(f"{f2.get_ncols()=}")
+# print(f"{root.get_ncols()=}")
+# grid = root.get_grid()
+# print(f"{grid=}, {len(grid)=}")
+# print(f"{root.get_max_depth()=}, should be 3")
+print(f"{root.get_max_depth()=}, should be 5")
+print(f"{f1.get_max_depth()=}, should be 1")
+print(f"{f4.get_max_depth()=}, should be 2")
+print(f"{f41.get_max_depth()=}, should be 1")
+print(f"{f42.get_max_depth()=}, should be 1")
+print(f"{f7111.get_max_depth()=}, should be 1")
+print(f"{f711.get_max_depth()=}, should be 2")
+print(f"{f71.get_max_depth()=}, should be 3")
+print(f"{f72.get_max_depth()=}, should be 1")
+print(f"{f7.get_max_depth()=}, should be 4")
+
