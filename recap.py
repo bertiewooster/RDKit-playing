@@ -74,6 +74,8 @@ class NonBinTree:
 
     def get_grid(self):
         self.get_ncols()
+        self.get_max_depth()
+
         # Create top row: Molecule, then the rest of columns are blank (empty strings)
         grid = [self.val] + [""] * (self.ncols - 1)
         return grid
@@ -104,21 +106,40 @@ f712 = f71.add_node("f712")
 f7111 = f711.add_node("f7111")
 f7112 = f712.add_node("f7112")
 
-print(root)
+# print(root)
 # print(f"{f1.get_ncols()=}")
 # print(f"{f2.get_ncols()=}")
 # print(f"{root.get_ncols()=}")
 # grid = root.get_grid()
 # print(f"{grid=}, {len(grid)=}")
 # print(f"{root.get_max_depth()=}, should be 3")
-print(f"{root.get_max_depth()=}, should be 5")
-print(f"{f1.get_max_depth()=}, should be 1")
-print(f"{f4.get_max_depth()=}, should be 2")
-print(f"{f41.get_max_depth()=}, should be 1")
-print(f"{f42.get_max_depth()=}, should be 1")
-print(f"{f7111.get_max_depth()=}, should be 1")
-print(f"{f711.get_max_depth()=}, should be 2")
-print(f"{f71.get_max_depth()=}, should be 3")
-print(f"{f72.get_max_depth()=}, should be 1")
-print(f"{f7.get_max_depth()=}, should be 4")
+# print(f"{root.get_max_depth()=}, should be 5")
+# print(f"{f1.get_max_depth()=}, should be 1")
+# print(f"{f4.get_max_depth()=}, should be 2")
+# print(f"{f41.get_max_depth()=}, should be 1")
+# print(f"{f42.get_max_depth()=}, should be 1")
+# print(f"{f7111.get_max_depth()=}, should be 1")
+# print(f"{f711.get_max_depth()=}, should be 2")
+# print(f"{f71.get_max_depth()=}, should be 3")
+# print(f"{f72.get_max_depth()=}, should be 1")
+# print(f"{f7.get_max_depth()=}, should be 4")
 
+molecule_grid = [["molecule"] + [""] * 8]
+print(f"{molecule_grid=}")
+
+f1_grid = [["f1"], [""], [""]]
+f2_grid = [["f2", "", "", ""], ["f21", "f22", "", "f23"], ["", "f221", "f222", ""]]
+f3_grid = [["f3"], [""], [""]]
+f4_grid = [["f4", ""], ["f41", "f42"], ["", "", ""]]
+
+grid = list(zip(f1_grid, f2_grid, f3_grid, f4_grid))
+print(f"{grid=}")
+
+print("grid rows:")
+for row in grid:
+    print(row)
+    # Remove tuple, flatten into single list
+
+molecule_grid = molecule_grid + grid
+
+print(f"{molecule_grid=}")
