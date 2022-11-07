@@ -73,38 +73,85 @@ class NonBinTree:
         return self.max_depth
 
     def get_grid(self):
-        self.get_ncols()
-        self.get_max_depth()
+        self_cols = self.get_ncols()
+        self_rows = self.get_max_depth()
 
-        # Create top row: Molecule, then the rest of columns are blank (empty strings)
-        grid = [self.val] + [""] * (self.ncols - 1)
+        # Create top row: Node value, then the rest of columns are blank (empty strings)
+        grid = [[self.val] + [""] * (self.ncols - 1)]
+        nodes_grid = []
+        if len(self.nodes) > 0:
+            for node in self.nodes:
+                # nodes_grid.append(node.get_grid())
+                node_grid = node.get_grid()
+
+                # Add spacer rows if needed
+                node_grid_rows = len([node_grid])
+                rows_padding = self_rows - node_grid_rows - 1
+                for padding in range(rows_padding):
+                    node_grid.append(["" * rows_padding])
+                grid += [node_grid]
+
+            # node_grid_2D = [item for sublist in node_grid for item in sublist]
+            # node_grid_flat = [item for sublist in node_grid_2D for item in sublist]
+            # grid += [node_grid_flat]
+
         return grid
 
 
-root = NonBinTree("cisapride")
-f1 = root.add_node("f1")
-f2 = root.add_node("f2")
-f21 = f2.add_node("f21")
-f22 = f2.add_node("f22")
-f23 = f2.add_node("f23")
-f26 = f2.add_node("f24")
-f3 = root.add_node("f3")
-f4 = root.add_node("f4")
-f41 = f4.add_node("f41")
-f42 = f4.add_node("f42")
-f5 = root.add_node("f5")
-f6 = root.add_node("f6")
-f61 = f6.add_node("f61")
-f62 = f6.add_node("f62")
+# root = NonBinTree("cisapride")
+# f1 = root.add_node("f1")
+# f2 = root.add_node("f2")
+# f21 = f2.add_node("f21")
+# f22 = f2.add_node("f22")
+# f23 = f2.add_node("f23")
+# f24 = f2.add_node("f24")
+# f3 = root.add_node("f3")
+# f4 = root.add_node("f4")
+# f41 = f4.add_node("f41")
+# f42 = f4.add_node("f42")
+# f5 = root.add_node("f5")
+# f6 = root.add_node("f6")
+# f61 = f6.add_node("f61")
+# f62 = f6.add_node("f62")
 
 # Adding for debugging--not real for cisapride
-f7 = root.add_node("f7")
-f71 = f7.add_node("f71")
-f72 = f7.add_node("f71")
-f711 = f71.add_node("f711")
-f712 = f71.add_node("f712")
-f7111 = f711.add_node("f7111")
-f7112 = f712.add_node("f7112")
+# f7 = root.add_node("f7")
+# f71 = f7.add_node("f71")
+# f72 = f7.add_node("f71")
+# f711 = f71.add_node("f711")
+# f712 = f71.add_node("f712")
+# f7111 = f711.add_node("f7111")
+# f7112 = f712.add_node("f7112")
+
+root = NonBinTree("Fe")
+f1 = root.add_node("C")
+f2 = root.add_node("CC")
+f21 = f2.add_node("CCN")
+f22 = f2.add_node("CCNN")
+f221 = f22.add_node("CCNNO")
+f222 = f22.add_node("CCNNOO")
+f23 = f2.add_node("CCNNN")
+f3 = root.add_node("CCC")
+f4 = root.add_node("CCCC")
+f41 = f4.add_node("CCCCN")
+f42 = f4.add_node("CCCCNN")
+
+# print(f"{f1.get_grid()=}")
+# print(f"{f21.get_grid()=}")
+print(f"{f22.get_grid()=}")
+# print(f"{f23.get_grid()=}")
+# print(f"{f2.get_grid()=}")
+
+
+# def combine_grids(*grids):
+#     grid = list(zip(*grids))
+#     grid_flat = []
+#     for row in grid:
+#         # Remove tuple, flatten into single list
+#         flat_row = [item for item in row]
+#         grid_flat.append(flat_row)
+#         # print(f"{flat_row=}")
+
 
 # print(root)
 # print(f"{f1.get_ncols()=}")
@@ -125,34 +172,48 @@ f7112 = f712.add_node("f7112")
 # print(f"{f7.get_max_depth()=}, should be 4")
 
 # molecule_grid = [["molecule"] + [""] * 8]
-molecule_grid = [["O"] + [""] * 8]
-print(f"{molecule_grid=}")
+# molecule_grid = [["O"] + [""] * 8]
+# print(f"{molecule_grid=}")
 
 # f1_grid = [["f1"], [""], [""]]
 # f2_grid = [["f2", "", "", ""], ["f21", "f22", "", "f23"], ["", "f221", "f222", ""]]
 # f3_grid = [["f3"], [""], [""]]
 # f4_grid = [["f4", ""], ["f41", "f42"], ["", "", ""]]
-f1_grid = [["C"], [""], [""]]
-f2_grid = [
-    ["CC", "", "", ""],
-    ["CCN", "CCNN", "", "CCNNN"],
-    ["", "CCNNO", "CCNNOO", ""],
-]
-f3_grid = [["CCC"], [""], [""]]
-f4_grid = [["CCCC", ""], ["CCCCN", "CCCCNN"], ["", "", ""]]
 
-grid = list(zip(f1_grid, f2_grid, f3_grid, f4_grid))
-print(f"{grid=}")
+# f1_grid = [["C"], [""], [""]]
+# f21_grid = ["CCN"]
 
-print("grid rows:")
-for row in grid:
-    # Remove tuple, flatten into single list
-    flat_row = [item for sublist in row for item in sublist]
-    molecule_grid.append(flat_row)
-    # print(f"{flat_row=}")
+# f221_grid = ["CCNNO"]
+# f222_grid = ["CCNNOO"]
+# f22_grid = [["CCNN", ""], f221_grid + f222_grid]
 
-# molecule_grid = molecule_grid + grid
+# f22_sub_grids = combine_grids(f221_grid, f222_grid)
+# print(f"{f22_sub_grids=}")
 
-molecule_grid_flat = [item for sublist in molecule_grid for item in sublist]
+# f23_grid = ["CCNNN"]
 
-print(f"{molecule_grid_flat=}")
+# f2_grid =
+
+# f2_grid = [
+#     ["CC", "", "", ""],
+#     ["CCN", "CCNN", "", "CCNNN"],
+#     ["", "CCNNO", "CCNNOO", ""],
+# ]
+# f3_grid = [["CCC"], [""], [""]]
+# f4_grid = [["CCCC", ""], ["CCCCN", "CCCCNN"], ["", "", ""]]
+
+# grid = list(zip(f1_grid, f2_grid, f3_grid, f4_grid))
+# print(f"{grid=}")
+
+# print("grid rows:")
+# for row in grid:
+#     # Remove tuple, flatten into single list
+#     flat_row = [item for sublist in row for item in sublist]
+#     molecule_grid.append(flat_row)
+#     # print(f"{flat_row=}")
+
+# # molecule_grid = molecule_grid + grid
+
+# molecule_grid_flat = [item for sublist in molecule_grid for item in sublist]
+
+# print(f"{molecule_grid_flat=}")
