@@ -1,5 +1,31 @@
+from itertools import chain
+
 from rdkit import Chem
 from rdkit.Chem import Draw, Recap
+
+# def flatten_to_list(nested_list):
+#     if nested_list == []:
+#         return []
+#     mylist = nested_list.copy()
+#     new_list = []
+#     for item in nested_list:
+#         while isinstance(item, (list, tuple)):
+#             for subitem in item:
+#                 while isinstance(subitem, (list, tuple)):
+#                     subitem = list(chain(*subitem))
+#                 new_list += subitem
+#             # mylist[0] = list(chain(*mylist))
+#         # new_list += item
+#     return mylist
+
+
+a = [1, 2]
+b = [[1], [2]]
+c = [[[1], [2], [3]]]
+
+# print(flatten_to_list(a))
+# print(flatten_to_list(b))
+# print(flatten_to_list(c))
 
 # cisapride = Chem.MolFromSmiles("Clc1cc(c(OC)cc1N)C(=O)NC3CCN(CCCOc2ccc(F)cc2)CC3OC")
 # # Draw.MolToImage(cisapride)
@@ -78,9 +104,12 @@ class NonBinTree:
 
         # Create top row: Node value, then the rest of columns are blank (empty strings)
         grid = [[self.val] + [""] * (self.ncols - 1)]
+        for rows_to_pad in range(self_rows - 1):
+            grid += [[]]
+
         nodes_grid = []
         if len(self.nodes) > 0:
-            for node in self.nodes:
+            for node_counter, node in enumerate(self.nodes):
                 # nodes_grid.append(node.get_grid())
                 node_grid = node.get_grid()
 
@@ -89,7 +118,34 @@ class NonBinTree:
                 rows_padding = self_rows - node_grid_rows - 1
                 for padding in range(rows_padding):
                     node_grid.append(["" * rows_padding])
-                grid += [node_grid]
+                # nodes_grid += node_grid
+
+                nodes_grid += node_grid
+
+            combined = []
+            for row_counter in range(node_grid_rows):
+                for node_number in range(len(self.nodes)):
+                    combined += [nodes_grid[node_number][row_counter]]
+                # if nodes_grid == []:
+                #     nodes_grid = node_grid.copy()
+                # else:
+                #     # nodes_grid = list(zip(nodes_grid, node_grid))
+                #     # combined = []
+                #     # node_grid_flat = flatten_to_list(node_grid)
+
+                #     # 2022-11-06 I think the problem is here: Combining wrong lists
+                #     for row_counter in range(len(node_grid)):
+                #         # nodes_grid += [nodes_grid[row_counter] + node_grid[row_counter]]
+                #         # nodes_grid += node_grid[row_counter]
+                #         nodes_grid[0] += node_grid[row_counter]
+
+                # nodes_grid_flat = flatten_to_list(nodes_grid)
+
+            # nodes_grid_flat = flatten_to_list(nodes_grid)
+            # nodes_grid_flat_2 = list(chain(*nodes_grid_flat))
+            # grid += [nodes_grid_flat]
+            grid[-1] = combined
+            # grid += [nodes_grid]
 
             # node_grid_2D = [item for sublist in node_grid for item in sublist]
             # node_grid_flat = [item for sublist in node_grid_2D for item in sublist]
@@ -97,6 +153,14 @@ class NonBinTree:
 
         return grid
 
+
+nested = [
+    ((["CCN"], ["CCNN", ""]), ["CCNNN"]),
+    (([""], [(["CCNNO"], ["CCNNOO"])]), [""]),
+]
+# print("nested, flattened:")
+# print(nested)
+# print(flatten_to_list(nested))
 
 # root = NonBinTree("cisapride")
 # f1 = root.add_node("f1")
@@ -139,6 +203,7 @@ f42 = f4.add_node("CCCCNN")
 # print(f"{f1.get_grid()=}")
 # print(f"{f21.get_grid()=}")
 print(f"{f22.get_grid()=}")
+# print(f"{f221.get_grid()=}")
 # print(f"{f23.get_grid()=}")
 # print(f"{f2.get_grid()=}")
 
