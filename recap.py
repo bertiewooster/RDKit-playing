@@ -107,49 +107,27 @@ class NonBinTree:
         for rows_to_pad in range(self_rows - 1):
             grid += [[]]
 
-        nodes_grid = []
-        if len(self.nodes) > 0:
+        n_nodes = len(self.nodes)
+        if n_nodes > 0:
+            nodes_grid = [[""]] * n_nodes
             for node_counter, node in enumerate(self.nodes):
                 # nodes_grid.append(node.get_grid())
                 node_grid = node.get_grid()
 
+                if self.val == "CC":
+                    ...
                 # Add spacer rows if needed
-                node_grid_rows = len([node_grid])
+                node_grid_rows = len(node_grid)
                 rows_padding = self_rows - node_grid_rows - 1
                 for padding in range(rows_padding):
                     node_grid.append(["" * rows_padding])
-                # nodes_grid += node_grid
-
-                nodes_grid += node_grid
+                nodes_grid[node_counter] = node_grid
 
             combined = []
             for row_counter in range(node_grid_rows):
                 for node_number in range(len(self.nodes)):
                     combined += [nodes_grid[node_number][row_counter]]
-                # if nodes_grid == []:
-                #     nodes_grid = node_grid.copy()
-                # else:
-                #     # nodes_grid = list(zip(nodes_grid, node_grid))
-                #     # combined = []
-                #     # node_grid_flat = flatten_to_list(node_grid)
-
-                #     # 2022-11-06 I think the problem is here: Combining wrong lists
-                #     for row_counter in range(len(node_grid)):
-                #         # nodes_grid += [nodes_grid[row_counter] + node_grid[row_counter]]
-                #         # nodes_grid += node_grid[row_counter]
-                #         nodes_grid[0] += node_grid[row_counter]
-
-                # nodes_grid_flat = flatten_to_list(nodes_grid)
-
-            # nodes_grid_flat = flatten_to_list(nodes_grid)
-            # nodes_grid_flat_2 = list(chain(*nodes_grid_flat))
-            # grid += [nodes_grid_flat]
             grid[-1] = combined
-            # grid += [nodes_grid]
-
-            # node_grid_2D = [item for sublist in node_grid for item in sublist]
-            # node_grid_flat = [item for sublist in node_grid_2D for item in sublist]
-            # grid += [node_grid_flat]
 
         return grid
 
@@ -158,9 +136,28 @@ nested = [
     ((["CCN"], ["CCNN", ""]), ["CCNNN"]),
     (([""], [(["CCNNO"], ["CCNNOO"])]), [""]),
 ]
-# print("nested, flattened:")
-# print(nested)
-# print(flatten_to_list(nested))
+
+root = NonBinTree("Fe")
+f1 = root.add_node("C")
+f2 = root.add_node("CC")
+f21 = f2.add_node("CCN")
+f22 = f2.add_node("CCNN")
+f221 = f22.add_node("CCNNO")
+f222 = f22.add_node("CCNNOO")
+f23 = f2.add_node("CCNNN")
+f3 = root.add_node("CCC")
+f4 = root.add_node("CCCC")
+f41 = f4.add_node("CCCCN")
+f42 = f4.add_node("CCCCNN")
+
+# print(f"{f1.get_grid()=}")
+# print(f"{f21.get_grid()=}")
+print(f"{f22.get_grid()=}")
+# print(f"{f221.get_grid()=}")
+# print(f"{f23.get_grid()=}")
+# print(f"{f2.get_grid()=}")
+# print(f"{f3.get_grid()=}")
+# print(f"{f4.get_grid()=}")
 
 # root = NonBinTree("cisapride")
 # f1 = root.add_node("f1")
@@ -186,27 +183,6 @@ nested = [
 # f712 = f71.add_node("f712")
 # f7111 = f711.add_node("f7111")
 # f7112 = f712.add_node("f7112")
-
-root = NonBinTree("Fe")
-f1 = root.add_node("C")
-f2 = root.add_node("CC")
-f21 = f2.add_node("CCN")
-f22 = f2.add_node("CCNN")
-f221 = f22.add_node("CCNNO")
-f222 = f22.add_node("CCNNOO")
-f23 = f2.add_node("CCNNN")
-f3 = root.add_node("CCC")
-f4 = root.add_node("CCCC")
-f41 = f4.add_node("CCCCN")
-f42 = f4.add_node("CCCCNN")
-
-# print(f"{f1.get_grid()=}")
-# print(f"{f21.get_grid()=}")
-print(f"{f22.get_grid()=}")
-# print(f"{f221.get_grid()=}")
-# print(f"{f23.get_grid()=}")
-# print(f"{f2.get_grid()=}")
-
 
 # def combine_grids(*grids):
 #     grid = list(zip(*grids))
