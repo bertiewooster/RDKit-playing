@@ -3,30 +3,6 @@ from itertools import chain
 from rdkit import Chem
 from rdkit.Chem import Draw, Recap
 
-# def flatten_to_list(nested_list):
-#     if nested_list == []:
-#         return []
-#     mylist = nested_list.copy()
-#     new_list = []
-#     for item in nested_list:
-#         while isinstance(item, (list, tuple)):
-#             for subitem in item:
-#                 while isinstance(subitem, (list, tuple)):
-#                     subitem = list(chain(*subitem))
-#                 new_list += subitem
-#             # mylist[0] = list(chain(*mylist))
-#         # new_list += item
-#     return mylist
-
-
-a = [1, 2]
-b = [[1], [2]]
-c = [[[1], [2], [3]]]
-
-# print(flatten_to_list(a))
-# print(flatten_to_list(b))
-# print(flatten_to_list(c))
-
 # cisapride = Chem.MolFromSmiles("Clc1cc(c(OC)cc1N)C(=O)NC3CCN(CCCOc2ccc(F)cc2)CC3OC")
 # # Draw.MolToImage(cisapride)
 # hierarch = Recap.RecapDecompose(cisapride)
@@ -114,8 +90,6 @@ class NonBinTree:
 
         # Create top row: Node value, then the rest of columns are blank (empty strings)
         grid = [[self.val] + [""] * (self.ncols - 1)]
-        # for rows_to_pad in range(self_rows - 1):
-        #     grid += [[]]
 
         n_nodes = len(self.nodes)
         if n_nodes > 0:
@@ -129,7 +103,6 @@ class NonBinTree:
                 node_grid_rows = len(node_grid)
                 rows_padding = self_rows - node_grid_rows - 1
                 for padding in range(rows_padding):
-                    # node_grid.append(["" * rows_padding])
                     node_grid += [[""] * len(node_grid[0])]
 
                 nodes_grid = concat(nodes_grid, node_grid)
