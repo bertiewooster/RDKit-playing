@@ -19,6 +19,7 @@ f42 = f4.add_node("CCCCNN")
 @pytest.mark.parametrize(
     "name, tree, grid",
     [
+        ("root", root, [['Fe', '', '', '', '', '', '', ''], ["C", "CC", "", "", "", "CCC", "CCCC", ""], ["", 'CCN', 'CCNN', '', 'CCNNN', "", "CCCCN", "CCCCNN"], ["", '', 'CCNNO', 'CCNNOO', '', '', '', '']]),
         ("f1", f1, [['C']]),
         ("f2", f2, [["CC", "", "", ""], ['CCN', 'CCNN', '', 'CCNNN'], ['', 'CCNNO', 'CCNNOO', '']]),
         ("f21", f21, [['CCN']]),
