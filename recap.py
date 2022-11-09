@@ -61,6 +61,11 @@ c = [[[1], [2], [3]]]
 # cols = get_children(hierarch, 0, 0)
 # # print(f"{cols=}")
 
+def concat(grid1, grid2):
+    combined = []
+    for row_counter in range(len(grid1)):
+        combined += [grid1[row_counter] + grid2[row_counter]]
+    return combined
 
 class NonBinTree:
     """Adapted from https://stackoverflow.com/questions/60579330/non-binary-tree-data-structure-in-python#60579464"""
@@ -104,30 +109,34 @@ class NonBinTree:
 
         # Create top row: Node value, then the rest of columns are blank (empty strings)
         grid = [[self.val] + [""] * (self.ncols - 1)]
-        for rows_to_pad in range(self_rows - 1):
-            grid += [[]]
+        # for rows_to_pad in range(self_rows - 1):
+        #     grid += [[]]
 
         n_nodes = len(self.nodes)
         if n_nodes > 0:
-            nodes_grid = [[""]] * n_nodes
+            # nodes_grid = [[""]] * n_nodes
+            nodes_grid = [[]]
             for node_counter, node in enumerate(self.nodes):
                 # nodes_grid.append(node.get_grid())
                 node_grid = node.get_grid()
 
-                if self.val == "CC":
+                if self.val == "CCNN":
                     ...
                 # Add spacer rows if needed
                 node_grid_rows = len(node_grid)
                 rows_padding = self_rows - node_grid_rows - 1
                 for padding in range(rows_padding):
                     node_grid.append(["" * rows_padding])
-                nodes_grid[node_counter] = node_grid
+                # nodes_grid[node_counter] = node_grid
 
-            combined = []
-            for row_counter in range(node_grid_rows):
-                for node_number in range(len(self.nodes)):
-                    combined += [nodes_grid[node_number][row_counter]]
-            grid[-1] = combined
+                nodes_grid = concat(nodes_grid, node_grid)
+
+            # combined = []
+            # for row_counter in range(node_grid_rows):
+            #     for node_number in range(len(self.nodes)):
+            #         combined += [nodes_grid[node_number][row_counter]]
+            grid += nodes_grid
+            # grid[-1] = nodes_grid
 
         return grid
 
