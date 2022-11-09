@@ -62,9 +62,14 @@ c = [[[1], [2], [3]]]
 # # print(f"{cols=}")
 
 def concat(grid1, grid2):
-    combined = []
-    for row_counter in range(len(grid1)):
-        combined += [grid1[row_counter] + grid2[row_counter]]
+    if grid1 == [[]]:
+        combined = grid2
+    elif grid2 == [[]]:
+        combined = grid1
+    else:
+        combined = []
+        for row_counter in range(len(grid1)):
+            combined += [grid1[row_counter] + grid2[row_counter]]
     return combined
 
 class NonBinTree:
@@ -120,7 +125,7 @@ class NonBinTree:
                 # nodes_grid.append(node.get_grid())
                 node_grid = node.get_grid()
 
-                if self.val == "CCNN":
+                if self.val == "CC":
                     ...
                 # Add spacer rows if needed
                 node_grid_rows = len(node_grid)
@@ -161,10 +166,10 @@ f42 = f4.add_node("CCCCNN")
 
 # print(f"{f1.get_grid()=}")
 # print(f"{f21.get_grid()=}")
-print(f"{f22.get_grid()=}")
+# print(f"{f22.get_grid()=}")
 # print(f"{f221.get_grid()=}")
 # print(f"{f23.get_grid()=}")
-# print(f"{f2.get_grid()=}")
+print(f"{f2.get_grid()=}")
 # print(f"{f3.get_grid()=}")
 # print(f"{f4.get_grid()=}")
 
