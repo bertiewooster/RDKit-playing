@@ -1,5 +1,3 @@
-from itertools import chain
-
 from rdkit import Chem
 from rdkit.Chem import Draw, Recap
 
@@ -130,7 +128,14 @@ f4 = root.add_node("CCCC")
 f41 = f4.add_node("CCCCN")
 f42 = f4.add_node("CCCCNN")
 
-print(f"{root.get_grid()=}")
+recap_2D = root.get_grid()
+recap_plot = [item for sublist in recap_2D for item in sublist]
+
+print(recap_plot)
+
+
+
+# print(f"{root.get_grid()=}")
 # print(f"{f1.get_grid()=}")
 # print(f"{f21.get_grid()=}")
 # print(f"{f22.get_grid()=}")
