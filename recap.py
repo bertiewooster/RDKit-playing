@@ -1,35 +1,35 @@
 from rdkit import Chem
 from rdkit.Chem import Draw, Recap
 
-# cisapride = Chem.MolFromSmiles("Clc1cc(c(OC)cc1N)C(=O)NC3CCN(CCCOc2ccc(F)cc2)CC3OC")
-# # Draw.MolToImage(cisapride)
-# hierarch = Recap.RecapDecompose(cisapride)
-# ks = hierarch.children.keys()
-# ks = sorted(ks)
-# # print(f"{ks=}")
+cisapride = Chem.MolFromSmiles("Clc1cc(c(OC)cc1N)C(=O)NC3CCN(CCCOc2ccc(F)cc2)CC3OC")
+# Draw.MolToImage(cisapride)
+hierarch = Recap.RecapDecompose(cisapride)
+ks = hierarch.children.keys()
+ks = sorted(ks)
+# print(f"{ks=}")
 
-# # all_children = hierarch.GetAllChildren()
-# # print(f"{all_children=}")
+# all_children = hierarch.GetAllChildren()
+# print(f"{all_children=}")
 
-# generations = [hierarch.smiles]
+generations = [hierarch.smiles]
 
-# level = hierarch
-# level_counter = 0
+level = hierarch
+level_counter = 0
 
 
-# def get_children(base_node, level, cols=0):
-#     for smiles, node in base_node.children.items():
-#         spaces = " " * level
-#         # print(f"{spaces}{smiles=}")
-#         children = node.children.keys()
-#         children = sorted(children)
-#         if len(children) > 0:
-#             get_children(node, level + 1, cols)
-#             # print(f"{children=}")
-#         else:
-#             cols += 1
-#             # print(f"{cols=}")
-#             # return cols
+def get_children(base_node, level, cols=0):
+    for smiles, node in base_node.children.items():
+        spaces = " " * level
+        # print(f"{spaces}{smiles=}")
+        children = node.children.keys()
+        children = sorted(children)
+        if len(children) > 0:
+            get_children(node, level + 1, cols)
+            # print(f"{children=}")
+        else:
+            cols += 1
+            # print(f"{cols=}")
+            # return cols
 
 
 # cols = get_children(hierarch, 0, 0)
@@ -170,14 +170,6 @@ print(recap_plot)
 # f7111 = f711.add_node("f7111")
 # f7112 = f712.add_node("f7112")
 
-# def combine_grids(*grids):
-#     grid = list(zip(*grids))
-#     grid_flat = []
-#     for row in grid:
-#         # Remove tuple, flatten into single list
-#         flat_row = [item for item in row]
-#         grid_flat.append(flat_row)
-#         # print(f"{flat_row=}")
 
 
 # print(root)
@@ -228,19 +220,3 @@ print(recap_plot)
 # ]
 # f3_grid = [["CCC"], [""], [""]]
 # f4_grid = [["CCCC", ""], ["CCCCN", "CCCCNN"], ["", "", ""]]
-
-# grid = list(zip(f1_grid, f2_grid, f3_grid, f4_grid))
-# print(f"{grid=}")
-
-# print("grid rows:")
-# for row in grid:
-#     # Remove tuple, flatten into single list
-#     flat_row = [item for sublist in row for item in sublist]
-#     molecule_grid.append(flat_row)
-#     # print(f"{flat_row=}")
-
-# # molecule_grid = molecule_grid + grid
-
-# molecule_grid_flat = [item for sublist in molecule_grid for item in sublist]
-
-# print(f"{molecule_grid_flat=}")
