@@ -1,0 +1,6 @@
+Is there a way to put molecules on a scatter plot? For example, for a set of molecules, to
+
+- plot each molecule's melting point against its molecular weight, and
+- have each data point show the molecule's structure, either on the graph or as a pop-up when the user mouses over the data point
+
+I could be remembering a tool outside the RDKit. (The [RDKit cookbook has an example of showing one molecule on a plot](https://www.rdkit.org/docs/Cookbook.html#on-a-plot), but its position isn't determined by its properties that are being plotted.)
