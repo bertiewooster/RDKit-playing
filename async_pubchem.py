@@ -2,7 +2,6 @@
 import asyncio
 
 import aiohttp
-import requests
 from codetiming import Timer
 
 
@@ -11,23 +10,23 @@ async def is_commercially_available(name, work_queue):
     async with aiohttp.ClientSession() as session:
         while not work_queue.empty():
             smiles = await work_queue.get()
-            # print(f"Task {name} getting URL: {url}")
+            print(f"Task {name} getting URL")
             timer.start()
             get_cid_URL = f"https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/smiles/{smiles}/cids/TXT"
             async with session.get(get_cid_URL, ssl=False) as response:
                 get_cid_response = await response.text()
                 cid = get_cid_response.strip("\n")
             if cid == '0':
+                print(f"Task {name}: No chemical in PubChem")
                 return False
 
             compound_url = f"https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound/{cid}/XML?heading=Chemical-Vendors"
 
             async with session.get(compound_url, ssl=False) as response:
                 compound_vendors_response = await response.text()
-                # cid = get_cid_URL.strip("\n")
 
             print(f"  Task {name} {smiles} cid: {cid}")
-            print(f"  Task {name} {smiles} {compound_url=}, response = {compound_vendors_response[:100]}")
+            print(f"  Task {name} {smiles} {compound_url=}, response = {compound_vendors_response[:70]}")
             timer.stop()
 
             if "<Message>No data found</Message>" in compound_vendors_response:
@@ -44,20 +43,21 @@ async def main():
     work_queue = asyncio.Queue()
 
     # Put some work in the queue
-    for smiles in [
+    smiles_list = [
+        # In PubChem and is commercially available. Should return True.
         "CCCC",
-        "c1ccccc1",
-        "c1ccccc1CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCF",
-    ]:
+        # In PubChem, but not commercially available. Should return False.
+        "C3CCCC(C2CCCC(C1CCCCC1)CC2)CCC3",
+        # Not in PubChem. Should return False.
+        "CCCCCCCCCCCCCCCCCCCCCCc1ccccc1CCCCCCCCCCCC",
+    ]
+    for smiles in smiles_list:
         await work_queue.put(smiles)
 
     # Run the tasks
     with Timer(text="\nTotal elapsed time: {:.2f}"):
-        values = await asyncio.gather(
-            asyncio.create_task(is_commercially_available("One", work_queue)),
-            asyncio.create_task(is_commercially_available("Two", work_queue)),
-            asyncio.create_task(is_commercially_available("Three", work_queue)),
-        )
+        tasks = [is_commercially_available(smiles, work_queue) for smiles in smiles_list]
+        values = await asyncio.gather(*tasks)
     
     for index, value in enumerate(values):
         print(f"{index}: {value}")
