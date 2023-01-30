@@ -125,17 +125,28 @@ async def check_avail_several(smiles_set: set[str]):
         print(f"Reactant {index}: {reactant}, {reactant.smiles}, in_pubchem: {reactant.in_pubchem}, commercially_available: {reactant.commercially_available}")
 
 if __name__ == "__main__":
-    reactants = [
+    # reactants = [
+    #     # In PubChem and is commercially available. Should return True.
+    #     "CCCC",
+    #     # In PubChem and is commercially available. Should return True.
+    #     "CCCC",
+    #     # In PubChem, but not commercially available. Should return False.
+    #     "C3CCCC(C2CCCC(C1CCCCC1)CC2)CCC3",
+    #     # Not in PubChem. Should return False.
+    #     "CCCCCCCCCCCCCCCCCCCCCCc1ccccc1CCCCCCCCCCCC",
+    # ]
+
+    reactants = {
         # In PubChem and is commercially available. Should return True.
-        "CCCC",
+        "CCCC": None,
         # In PubChem and is commercially available. Should return True.
-        "CCCC",
+        "CCCC": None,
         # In PubChem, but not commercially available. Should return False.
-        "C3CCCC(C2CCCC(C1CCCCC1)CC2)CCC3",
+        "C3CCCC(C2CCCC(C1CCCCC1)CC2)CCC3": None,
         # Not in PubChem. Should return False.
-        "CCCCCCCCCCCCCCCCCCCCCCc1ccccc1CCCCCCCCCCCC",
-    ]
+        "CCCCCCCCCCCCCCCCCCCCCCc1ccccc1CCCCCCCCCCCC": None,
+    }
 
     # Merge list of starting materials into a set, so only query PubChem once for each reactant
-    reactants_set = set(reactants)
+    reactants_set = set(reactants.keys())
     asyncio.run(check_avail_several(reactants_set))
