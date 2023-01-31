@@ -98,11 +98,9 @@ class Reaction():
         for reactant in self.reactants:
             if not self.reactants[reactant].commercially_available:
                 self._reactants_commercially_available = False
+                return False
         self._reactants_commercially_available = True
-
-        # @reactants_commercially_available.setter
-        # def reactants_commercially_available(self, value):
-        #     self._reactants_commercially_available = value
+        return True
 
 async def is_commercially_available(smiles, work_queue):
     async with aiohttp.ClientSession() as session:
