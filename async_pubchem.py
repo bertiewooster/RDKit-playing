@@ -229,7 +229,7 @@ async def check_reactions(target_reaction_list: list[list[str, str]]):
     return reaction_reactants_avail
 
 async def check_rxns():
-    bicyclic_target = "O=P([O-])([O-])OCN1C2C=CC(C2)C1CC1NCCc2ccccc21"
+    bicyclic_target = "OCN1C2CC(C=C2)C1CC1NCCc2ccccc12"
     aniline_target = "c1ccc(NCC2NCCc3ccccc32)cc1"
     cyclobutyl_target = "FC1(F)CC(C2NCCc3ccccc32)C1"
 
