@@ -143,7 +143,7 @@ async def is_commercially_available(work_queue):
                 reactant.commercially_available = True
     return reactant
 
-async def check_avail_several(smiles_set: set[str]) -> dict[str, object]:
+async def check_avail_smiles_set(smiles_set: set[str]) -> dict[str, object]:
     """
     Asynchronously check the availability of several SMILES strings (chemicals) in PubChem
     """
@@ -155,7 +155,7 @@ async def check_avail_several(smiles_set: set[str]) -> dict[str, object]:
         await work_queue.put(smiles)
 
     # Determine commercial availability of each reactant
-    with Timer(text="\n--Total elapsed time: {:.2f}"):
+    with Timer(text="\n--Total elapsed time for PubChem API calls: {:.2f}"):
         tasks = [is_commercially_available(work_queue) for smiles in smiles_set]
         reactants = await asyncio.gather(*tasks)
     
@@ -205,13 +205,12 @@ async def check_reactions(target_reaction_list: list[list[str, str]]):
 
         # Add starting materials to set of starting materials
         for reactant in reaction.reactants:
-            # reactant_smiles = Chem.MolToSmiles(reactant)
             all_reactants_set.add(reactant)
         
         reactions.append(reaction)
 
     # Check commercial availability of set of starting materials
-    smiles_avail = await check_avail_several(all_reactants_set)
+    smiles_avail = await check_avail_smiles_set(all_reactants_set)
 
     print("Are starting materials commercially available for reaction -> target:")
 
@@ -221,7 +220,6 @@ async def check_reactions(target_reaction_list: list[list[str, str]]):
         # Add information to Reaction objects
         for this_reactant in reaction.reactants:
             # Set value for key of reactant SMILES, to reactant object from smiles_avail
-            # this_reactant_smiles = Chem.MolToSmiles(this_reactant)
             reaction.reactants[this_reactant] = smiles_avail[this_reactant]
         reaction.tally_all_reactants_commercially_available()
 
@@ -231,20 +229,19 @@ async def check_reactions(target_reaction_list: list[list[str, str]]):
 
     return reaction_reactants_avail
 
-async def check_rxns():
+if __name__ == "__main__":
     bicyclic_target = "OCN1C2CC(C=C2)C1CC1NCCc2ccccc12"
     aniline_target = "c1ccc(NCC2NCCc3ccccc32)cc1"
     cyclobutyl_target = "FC1(F)CC(C2NCCc3ccccc32)C1"
 
     pictet_spengler_rxn = '[cH1:1]1:[c:2](-[CH2:7]-[CH2:8]-[NH2:9]):[c:3]:[c:4]:[c:5]:[c:6]:1.[#6:11]-[CH1;R0:10]=[OD1]>>[c:1]12:[c:2](-[CH2:7]-[CH2:8]-[NH1:9]-[C:10]-2(-[#6:11])):[c:3]:[c:4]:[c:5]:[c:6]:1'
+    pictet_spengler = [pictet_spengler_rxn, "Pictet-Spengler"]
 
     # Reaction format: [target (SMILES), reaction_smarts]
-    rxn1 = [bicyclic_target, pictet_spengler_rxn, "Pictet Spengler"]
-    rxn2 = [aniline_target, pictet_spengler_rxn, "Pictet Spengler"]
-    rxn3 = [cyclobutyl_target, pictet_spengler_rxn, "Pictet Spengler"]
+    rxn1 = [bicyclic_target] + pictet_spengler
+    rxn2 = [aniline_target] + pictet_spengler
+    rxn3 = [cyclobutyl_target] + pictet_spengler
 
     rxns = [rxn1, rxn2, rxn3]
-    await check_reactions(rxns)
 
-if __name__ == "__main__":
-    asyncio.run(check_rxns())
+    asyncio.run(check_reactions(rxns))
