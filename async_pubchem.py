@@ -229,7 +229,7 @@ async def check_reactions(target_reaction_list: list[list[str, str]]):
 
     return reaction_reactants_avail
 
-if __name__ == "__main__":
+def main():
     bicyclic_target = "OCN1C2CC(C=C2)C1CC1NCCc2ccccc12"
     aniline_target = "c1ccc(NCC2NCCc3ccccc32)cc1"
     cyclobutyl_target = "FC1(F)CC(C2NCCc3ccccc32)C1"
@@ -245,3 +245,6 @@ if __name__ == "__main__":
     rxns = [rxn1, rxn2, rxn3]
 
     asyncio.run(check_reactions(rxns))
+
+if __name__ == "__main__":
+    main()
