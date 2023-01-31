@@ -103,11 +103,10 @@ class Reaction():
         self._reactants_commercially_available = True
         return True
 
-async def is_commercially_available(smiles, work_queue):
+async def is_commercially_available(work_queue):
     async with aiohttp.ClientSession() as session:
         while not work_queue.empty():
-            smiles_again = await work_queue.get()
-            print(f"{smiles=} {smiles_again=}")
+            smiles = await work_queue.get()
             # Create Reactant object, which will be populated during this function
             reactant = Reactant(smiles)
 
@@ -157,7 +156,7 @@ async def check_avail_several(smiles_set: set[str]) -> dict[str, object]:
 
     # Determine commercial availability of each reactant
     with Timer(text="\n--Total elapsed time: {:.2f}"):
-        tasks = [is_commercially_available(smiles, work_queue) for smiles in smiles_set]
+        tasks = [is_commercially_available(work_queue) for smiles in smiles_set]
         reactants = await asyncio.gather(*tasks)
     
     # Put reactants in dictionary of SMILES:Reaction object
