@@ -69,7 +69,7 @@ class Reactant():
 class Reaction():
     """Define a reaction's target, type, reactants, and commercial of reactants."""
 
-    def __init__(self, target, reaction_smarts):
+    def __init__(self, target, reaction_smarts, name):
         """
         Construct a Reaction object 
 
@@ -79,6 +79,7 @@ class Reaction():
         """
         self.target = target
         self.reaction_smarts = reaction_smarts
+        self.name = name
         self.target_mol = Chem.MolFromSmiles(self.target)
         self.reactants = dict()
 
@@ -110,18 +111,19 @@ async def is_commercially_available(smiles, work_queue):
             # Create Reactant object, which will be populated during this function
             reactant = Reactant(smiles)
 
-            timer = Timer(text=f"Task {smiles} elapsed time: {{:.2f}}")
+            timer = Timer(text=f"{smiles} PubChem API call(s) elapsed time: {{:.2f}}")
 
-            print(f"Task {smiles} getting URL")
+            # print(f"Task {smiles} getting URL")
             timer.start()
             get_cid_URL = f"https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/smiles/{smiles}/cids/TXT"
             async with session.get(get_cid_URL, ssl=False) as response:
                 get_cid_response = await response.text()
                 cid = get_cid_response.strip("\n")
             if cid == '0':
-                print(f"Task {smiles}: No chemical in PubChem")
+                # print(f"Task {smiles}: No chemical in PubChem")
                 reactant.in_pubchem = False
                 reactant.commercially_available = False
+                timer.stop()
                 return reactant
             else:
                 reactant.in_pubchem = True
@@ -132,8 +134,8 @@ async def is_commercially_available(smiles, work_queue):
             async with session.get(compound_url, ssl=False) as response:
                 compound_vendors_response = await response.text()
 
-            print(f"  Task {smiles} cid: {cid}")
-            print(f"  Task {smiles} {compound_url=}, response = {compound_vendors_response[:70]}")
+            # print(f"  Task {smiles} cid: {cid}")
+            # print(f"  Task {smiles} {compound_url=}, response = {compound_vendors_response[:70]}")
             timer.stop()
 
             if "<Message>No data found</Message>" in compound_vendors_response:
@@ -154,14 +156,14 @@ async def check_avail_several(smiles_set: set[str]) -> dict[str, object]:
         await work_queue.put(smiles)
 
     # Determine commercial availability of each reactant
-    with Timer(text="\nTotal elapsed time: {:.2f}"):
+    with Timer(text="\n--Total elapsed time: {:.2f}"):
         tasks = [is_commercially_available(smiles, work_queue) for smiles in smiles_set]
         reactants = await asyncio.gather(*tasks)
     
     # Put reactants in dictionary of SMILES:Reaction object
     smiles_avail = dict()
     for index, reactant in enumerate(reactants):
-        print(f"Reactant {index}: {reactant}, {reactant.smiles}, in_pubchem: {reactant.in_pubchem}, commercially_available: {reactant.commercially_available}")
+        # print(f"Reactant {index}: {reactant}, {reactant.smiles}, in_pubchem: {reactant.in_pubchem}, commercially_available: {reactant.commercially_available}")
         smiles_avail[reactant.smiles] = reactant
     
     return smiles_avail
@@ -187,7 +189,7 @@ async def check_reactions(target_reaction_list: list[list[str, str]]):
     # List of Reaction objects
     reactions = []
     for target_reaction in target_reaction_list:
-        reaction = Reaction(target_reaction[0], target_reaction[1])
+        reaction = Reaction(target_reaction[0], target_reaction[1], target_reaction[2])
 
         # Create forward reaction
         rxn_fwd = Chem.ReactionFromSmarts(reaction.reaction_smarts)
@@ -212,6 +214,8 @@ async def check_reactions(target_reaction_list: list[list[str, str]]):
     # Check commercial availability of set of starting materials
     smiles_avail = await check_avail_several(all_reactants_set)
 
+    print("Are starting materials commercially available for reaction -> target:")
+
     # [[reaction object 0, all reactants available], [reaction object 1, all reactants available],]
     reaction_reactants_avail = [[]]
     for reaction in reactions:
@@ -224,7 +228,7 @@ async def check_reactions(target_reaction_list: list[list[str, str]]):
 
         # Return results
         reaction_reactants_avail.append([reaction, reaction._reactants_commercially_available])
-        print(f"{reaction.target} {reaction.reaction_smarts} {reaction._reactants_commercially_available}")
+        print(f"{reaction.name} -> {reaction.target}: {reaction._reactants_commercially_available}")
 
     return reaction_reactants_avail
 
@@ -236,48 +240,12 @@ async def check_rxns():
     pictet_spengler_rxn = '[cH1:1]1:[c:2](-[CH2:7]-[CH2:8]-[NH2:9]):[c:3]:[c:4]:[c:5]:[c:6]:1.[#6:11]-[CH1;R0:10]=[OD1]>>[c:1]12:[c:2](-[CH2:7]-[CH2:8]-[NH1:9]-[C:10]-2(-[#6:11])):[c:3]:[c:4]:[c:5]:[c:6]:1'
 
     # Reaction format: [target (SMILES), reaction_smarts]
-    rxn1 = [bicyclic_target, pictet_spengler_rxn]
-    rxn2 = [aniline_target, pictet_spengler_rxn]
-    rxn3 = [cyclobutyl_target, pictet_spengler_rxn]
+    rxn1 = [bicyclic_target, pictet_spengler_rxn, "Pictet Spengler"]
+    rxn2 = [aniline_target, pictet_spengler_rxn, "Pictet Spengler"]
+    rxn3 = [cyclobutyl_target, pictet_spengler_rxn, "Pictet Spengler"]
 
     rxns = [rxn1, rxn2, rxn3]
     await check_reactions(rxns)
 
 if __name__ == "__main__":
     asyncio.run(check_rxns())
-
-    # reactants = [
-    #     # In PubChem and is commercially available. Should return True.
-    #     "CCCC",
-    #     # In PubChem and is commercially available. Should return True.
-    #     "CCCC",
-    #     # In PubChem, but not commercially available. Should return False.
-    #     "C3CCCC(C2CCCC(C1CCCCC1)CC2)CCC3",
-    #     # Not in PubChem. Should return False.
-    #     "CCCCCCCCCCCCCCCCCCCCCCc1ccccc1CCCCCCCCCCCC",
-    # ]
-
-    # Set up Reaction objects
-
-    
-    
-
-    # reactions = [rxn1, rxn2, rxn3,]
-
-    # reactants = {
-    #     # In PubChem and is commercially available. Should return True.
-    #     "CCCC": None,
-    #     # In PubChem and is commercially available. Should return True.
-    #     "CCCC": None,
-    #     # In PubChem, but not commercially available. Should return False.
-    #     "C3CCCC(C2CCCC(C1CCCCC1)CC2)CCC3": None,
-    #     # Not in PubChem. Should return False.
-    #     "CCCCCCCCCCCCCCCCCCCCCCc1ccccc1CCCCCCCCCCCC": None,
-    # }
-
-    # # Merge list of starting materials into a set, so only query PubChem once for each reactant
-    # reactants_set = set(reactants.keys())
-    # reactants_results = asyncio.run(check_avail_several(reactants_set))
-
-    # # Assign reactant object to each reaction's reactants
-    # for 
