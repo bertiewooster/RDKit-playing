@@ -80,6 +80,7 @@ class Reaction():
         self.target = target
         self.reaction_smarts = reaction_smarts
         self.target_mol = Chem.MolFromSmiles(self.target)
+        self.reactants = dict()
 
         @property
         def reactants(self):
@@ -93,8 +94,11 @@ class Reaction():
         def reactants_commercially_available(self):
             return self._reactants_commercially_available
 
-        def tally_all_reactants_commercially_available(self):
-            all([reactant.commercially_available for reactant in self._reactants])
+    def tally_all_reactants_commercially_available(self):
+        for reactant in self.reactants:
+            if not self.reactants[reactant].commercially_available:
+                self._reactants_commercially_available = False
+        self._reactants_commercially_available = True
 
         # @reactants_commercially_available.setter
         # def reactants_commercially_available(self, value):
@@ -161,6 +165,8 @@ async def check_avail_several(smiles_set: set[str]) -> dict[str, object]:
     for index, reactant in enumerate(reactants):
         print(f"Reactant {index}: {reactant}, {reactant.smiles}, in_pubchem: {reactant.in_pubchem}, commercially_available: {reactant.commercially_available}")
         smiles_avail[reactant.smiles] = reactant
+    
+    return smiles_avail
 
 def reverse_reaction(rxn_fwd):
     """rxn_fwd: rdkit.Chem.rdChemReactions.ChemicalReaction"""
@@ -172,7 +178,7 @@ def reverse_reaction(rxn_fwd):
     rxn_rev.Initialize()
     return rxn_rev
 
-def check_reactions(target_reaction_list: list[list[str, str]]):
+async def check_reactions(target_reaction_list: list[list[str, str]]):
     """
     target: SMILES
     reaction_smarts: SMARTS
@@ -192,33 +198,39 @@ def check_reactions(target_reaction_list: list[list[str, str]]):
         rxn_rev = reverse_reaction(rxn_fwd)
 
         # Run reverse reaction to determine starting materials
-        reaction.reactants = rxn_rev.RunReactants([reaction.target_mol])
+        
+        reactants = rxn_rev.RunReactants([reaction.target_mol])[0]
+        for reactant in reactants:
+            reactant_smiles = Chem.MolToSmiles(reactant)
+            reaction.reactants[reactant_smiles] = None
 
         # Add starting materials to set of starting materials
-        for reactant in reaction.reactants[0]:
-            reactant_smiles = Chem.MolToSmiles(reactant)
-            all_reactants_set.add(reactant_smiles)
+        for reactant in reaction.reactants:
+            # reactant_smiles = Chem.MolToSmiles(reactant)
+            all_reactants_set.add(reactant)
         
         reactions.append(reaction)
 
     # Check commercial availability of set of starting materials
-    smiles_avail = check_avail_several(all_reactants_set)
+    smiles_avail = await check_avail_several(all_reactants_set)
 
     # [[reaction object 0, all reactants available], [reaction object 1, all reactants available],]
     reaction_reactants_avail = [[]]
     for reaction in reactions:
         # Add information to Reaction objects
         for this_reactant in reaction.reactants:
-            this_reactant = smiles_avail[reactant.key]
+            # Set value for key of reactant SMILES, to reactant object from smiles_avail
+            # this_reactant_smiles = Chem.MolToSmiles(this_reactant)
+            reaction.reactants[this_reactant] = smiles_avail[this_reactant]
         reaction.tally_all_reactants_commercially_available()
 
         # Return results
-        reaction_reactants_avail.append([reaction, reaction.reactants_commercially_available])
-        print(f"{reaction.target} {reaction.reaction_smarts} {reaction.reactants_commercially_available}")
+        reaction_reactants_avail.append([reaction, reaction._reactants_commercially_available])
+        print(f"{reaction.target} {reaction.reaction_smarts} {reaction._reactants_commercially_available}")
 
     return reaction_reactants_avail
 
-if __name__ == "__main__":
+async def check_rxns():
     bicyclic_target = "O=P([O-])([O-])OCN1C2C=CC(C2)C1CC1NCCc2ccccc21"
     aniline_target = "c1ccc(NCC2NCCc3ccccc32)cc1"
     cyclobutyl_target = "FC1(F)CC(C2NCCc3ccccc32)C1"
@@ -231,7 +243,10 @@ if __name__ == "__main__":
     rxn3 = [cyclobutyl_target, pictet_spengler_rxn]
 
     rxns = [rxn1, rxn2, rxn3]
-    check_reactions(rxns)
+    await check_reactions(rxns)
+
+if __name__ == "__main__":
+    asyncio.run(check_rxns())
 
     # reactants = [
     #     # In PubChem and is commercially available. Should return True.
