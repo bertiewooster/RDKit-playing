@@ -15,9 +15,7 @@ class Reactant():
         """
         Construct a Reactant object to store the commercial availability of a reactant
 
-        :param input_file: Name of the file to read the Constraint from (string)
-        :param output_file: Name of the file to write the valid points to
-        :param n_results_str: Number of valid points to find, as a string until determine that it's an integer
+        :param smiles: SMILES string representing a molecule
         """
         self.smiles = smiles
         self.mol = Chem.MolFromSmiles(smiles)
@@ -73,9 +71,9 @@ class Reaction():
         """
         Construct a Reaction object 
 
-        :param input_file: Name of the file to read the Constraint from (string)
-        :param output_file: Name of the file to write the valid points to
-        :param n_results_str: Number of valid points to find, as a string until determine that it's an integer
+        :param target: The molecule to synthesize as a SMILES string
+        :param reaction_smarts: The reaction SMARTS as e.g. reactant1.reactant2>>product
+        :param name: Name of the reaction, for user's information
         """
         self.target = target
         self.reaction_smarts = reaction_smarts
@@ -96,6 +94,9 @@ class Reaction():
             return self._reactants_commercially_available
 
     def tally_all_reactants_commercially_available(self):
+        """
+        Given the commercial availability of each reactant, determine whether they are all available
+        """
         for reactant in self.reactants:
             if not self.reactants[reactant].commercially_available:
                 self._reactants_commercially_available = False
@@ -104,6 +105,14 @@ class Reaction():
         return True
 
 async def is_commercially_available(work_queue):
+    """
+    Asynchronously check the availability of a queue of SMILES strings (chemicals) in PubChem
+    Based on https://realpython.com/python-async-features/#asynchronous-non-blocking-http-calls
+
+    :param work_queue: A queue where each item is a SMILES string (representing a molecule)
+    :returns: Class Reactant object
+    """
+
     async with aiohttp.ClientSession() as session:
         while not work_queue.empty():
             smiles = await work_queue.get()
@@ -145,7 +154,11 @@ async def is_commercially_available(work_queue):
 
 async def check_avail_smiles_set(smiles_set: set[str]) -> dict[str, object]:
     """
-    Asynchronously check the availability of several SMILES strings (chemicals) in PubChem
+    Feed asynchronous queue to check the availability of several SMILES strings (chemicals) in PubChem
+    Based on https://realpython.com/python-async-features/#asynchronous-non-blocking-http-calls
+
+    :param smiles_set: Set of SMILES strings (representing molecules)
+    :returns: dictionary of SMIILES:reactant pairs, where reactant is class Reactant
     """
     # Create the queue of work
     work_queue = asyncio.Queue()
@@ -168,7 +181,14 @@ async def check_avail_smiles_set(smiles_set: set[str]) -> dict[str, object]:
     return smiles_avail
 
 def reverse_reaction(rxn_fwd):
-    """rxn_fwd: rdkit.Chem.rdChemReactions.ChemicalReaction"""
+    """
+    Reverse an RDKit reaction
+    Code adapted from https://www.rdkit.org/docs/Cookbook.html#reversing-reactions by Greg Landrum
+
+    :param rxn_fwd: forward chemical reaction rdkit.Chem.rdChemReactions.ChemicalReaction
+    :returns: reverse chemical reaction rdkit.Chem.rdChemReactions.ChemicalReaction
+    """
+
     rxn_rev = Chem.ChemicalReaction()
     for i in range(rxn_fwd.GetNumReactantTemplates()):
         rxn_rev.AddProductTemplate(rxn_fwd.GetReactantTemplate(i))
@@ -177,10 +197,10 @@ def reverse_reaction(rxn_fwd):
     rxn_rev.Initialize()
     return rxn_rev
 
-async def check_reactions(target_reaction_list: list[list[str, str]]):
+async def check_reactions(target_reaction_list: list[list[str, str, str]]):
     """
-    target: SMILES
-    reaction_smarts: SMARTS
+    Check whether the starting materials in a list of reactions are commercially available
+    :param target_reaction_list: List of reactions in format [target (SMILES), reaction SMARTS, reaction name]
     """
 
     all_reactants_set = set()
@@ -237,7 +257,7 @@ def main():
     pictet_spengler_rxn = '[cH1:1]1:[c:2](-[CH2:7]-[CH2:8]-[NH2:9]):[c:3]:[c:4]:[c:5]:[c:6]:1.[#6:11]-[CH1;R0:10]=[OD1]>>[c:1]12:[c:2](-[CH2:7]-[CH2:8]-[NH1:9]-[C:10]-2(-[#6:11])):[c:3]:[c:4]:[c:5]:[c:6]:1'
     pictet_spengler = [pictet_spengler_rxn, "Pictet-Spengler"]
 
-    # Reaction format: [target (SMILES), reaction_smarts]
+    # Reaction format: [target (SMILES), reaction SMARTS, reaction name]
     rxn1 = [bicyclic_target] + pictet_spengler
     rxn2 = [aniline_target] + pictet_spengler
     rxn3 = [cyclobutyl_target] + pictet_spengler
