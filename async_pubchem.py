@@ -104,6 +104,23 @@ class Reaction():
         self._reactants_commercially_available = True
         return True
 
+def reverse_reaction(rxn_fwd):
+    """
+    Reverse an RDKit reaction
+    Code adapted from https://www.rdkit.org/docs/Cookbook.html#reversing-reactions by Greg Landrum
+
+    :param rxn_fwd: forward chemical reaction rdkit.Chem.rdChemReactions.ChemicalReaction
+    :returns: reverse chemical reaction rdkit.Chem.rdChemReactions.ChemicalReaction
+    """
+
+    rxn_rev = Chem.ChemicalReaction()
+    for i in range(rxn_fwd.GetNumReactantTemplates()):
+        rxn_rev.AddProductTemplate(rxn_fwd.GetReactantTemplate(i))
+    for i in range(rxn_fwd.GetNumProductTemplates()):
+        rxn_rev.AddReactantTemplate(rxn_fwd.GetProductTemplate(i))
+    rxn_rev.Initialize()
+    return rxn_rev
+
 async def is_commercially_available(work_queue):
     """
     Asynchronously check the availability of a queue of SMILES strings (chemicals) in PubChem
@@ -119,7 +136,7 @@ async def is_commercially_available(work_queue):
             # Create Reactant object, which will be populated during this function
             reactant = Reactant(smiles)
 
-            timer = Timer(text=f"{smiles} PubChem API call(s) elapsed time: {{:.2f}}")
+            timer = Timer(text=f"{{:.2f}}s for {smiles} PubChem API call(s)")
 
             # print(f"Task {smiles} getting URL")
             timer.start()
@@ -168,7 +185,7 @@ async def check_avail_smiles_set(smiles_set: set[str]) -> dict[str, object]:
         await work_queue.put(smiles)
 
     # Determine commercial availability of each reactant
-    with Timer(text="\n--Total elapsed time for PubChem API calls: {:.2f}"):
+    with Timer(text="-----\n{:.2f}s total elapsed time for PubChem API calls"):
         tasks = [is_commercially_available(work_queue) for smiles in smiles_set]
         reactants = await asyncio.gather(*tasks)
     
@@ -179,23 +196,6 @@ async def check_avail_smiles_set(smiles_set: set[str]) -> dict[str, object]:
         smiles_avail[reactant.smiles] = reactant
     
     return smiles_avail
-
-def reverse_reaction(rxn_fwd):
-    """
-    Reverse an RDKit reaction
-    Code adapted from https://www.rdkit.org/docs/Cookbook.html#reversing-reactions by Greg Landrum
-
-    :param rxn_fwd: forward chemical reaction rdkit.Chem.rdChemReactions.ChemicalReaction
-    :returns: reverse chemical reaction rdkit.Chem.rdChemReactions.ChemicalReaction
-    """
-
-    rxn_rev = Chem.ChemicalReaction()
-    for i in range(rxn_fwd.GetNumReactantTemplates()):
-        rxn_rev.AddProductTemplate(rxn_fwd.GetReactantTemplate(i))
-    for i in range(rxn_fwd.GetNumProductTemplates()):
-        rxn_rev.AddReactantTemplate(rxn_fwd.GetProductTemplate(i))
-    rxn_rev.Initialize()
-    return rxn_rev
 
 async def check_reactions(target_reaction_list: list[list[str, str, str]]):
     """
@@ -232,7 +232,7 @@ async def check_reactions(target_reaction_list: list[list[str, str, str]]):
     # Check commercial availability of set of starting materials
     smiles_avail = await check_avail_smiles_set(all_reactants_set)
 
-    print("Are starting materials commercially available for reaction -> target:")
+    print("\nAre starting materials commercially available for reaction -> target:")
 
     # [[reaction object 0, all reactants available], [reaction object 1, all reactants available],]
     reaction_reactants_avail = [[]]
