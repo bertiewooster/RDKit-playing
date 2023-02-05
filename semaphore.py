@@ -127,18 +127,21 @@ async def safe_calls(smiles):
         return await is_commercially_available(smiles)
 
 
-async def run_tasks():
-    smiles_list = ["C", "CC", "CCC", "CCCC", "CCCCC", "CCCCCC"]
+async def check_avail_smiles_set(smiles_list):
     smiles_set = set(smiles_list)
     tasks = [asyncio.ensure_future(safe_calls(smiles)) for smiles in smiles_set]
     await asyncio.gather(*tasks)  # await completion of all API calls
 
 
-if __name__ ==  '__main__':
+def check_avail_smiles_list(smiles_list):
     with Timer(text="-----\n{:.2f}s total elapsed time for PubChem API calls"):
         loop = asyncio.get_event_loop()
         try:
-            loop.run_until_complete(run_tasks())
+            loop.run_until_complete(check_avail_smiles_set(smiles_list))
         finally:
             loop.run_until_complete(loop.shutdown_asyncgens())
             loop.close()
+
+if __name__ ==  '__main__':
+    smiles_list = ["C", "CC", "CCC", "CCCC", "CCCCC", "CCCCCC"]
+    check_avail_smiles_list(smiles_list)
