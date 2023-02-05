@@ -1,4 +1,3 @@
-# Source: https://realpython.com/python-async-features/#asynchronous-non-blocking-http-calls
 import asyncio
 
 import aiohttp
@@ -264,7 +263,9 @@ def main():
 
     rxns = [rxn1, rxn2, rxn3]
 
-    asyncio.run(check_reactions(rxns))
+    a = asyncio.run(check_reactions(rxns))
+
+    print(f"{a=}")
 
 if __name__ == "__main__":
     main()
