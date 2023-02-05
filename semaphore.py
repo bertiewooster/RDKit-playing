@@ -64,9 +64,14 @@ class Reactant():
         return str_print
 
 async def is_commercially_available(smiles):
-    # wait_time = randint(1, 3)
-    print(f'downloading {smiles}')
-    # await asyncio.sleep(wait_time)  # I/O, context will switch to main function
+    """
+    Asynchronously check the availability of a queue of SMILES strings (chemicals) in PubChem
+    Based on https://realpython.com/python-async-features/#asynchronous-non-blocking-http-calls
+
+    :param reactant_smiles: A SMILES string (representing a molecule)
+    :returns: Class Reactant object with information from PubChem
+    """
+    print(f'Calling API(s) for {smiles}')
 
     async with aiohttp.ClientSession() as session:
 
@@ -114,34 +119,26 @@ async def is_commercially_available(smiles):
         else:
             reactant.commercially_available = True
         print(f"{str(reactant)=}")   
-        print(f'downloaded {smiles}')
 
-
-sem = asyncio.Semaphore(3)
+sem = asyncio.Semaphore(2)
 
 async def safe_calls(smiles):
     async with sem:  # semaphore limits num of simultaneous API calls
         return await is_commercially_available(smiles)
 
 
-async def main():
+async def run_tasks():
     smiles_list = ["C", "CC", "CCC", "CCCC", "CCCCC", "CCCCCC"]
     smiles_set = set(smiles_list)
     tasks = [asyncio.ensure_future(safe_calls(smiles)) for smiles in smiles_set]
-
-    # tasks = [
-    #     asyncio.ensure_future(safe_download(i))  # creating task starts coroutine
-    #     for i
-    #     in range(9)
-    # ]
-    await asyncio.gather(*tasks)  # await moment all downloads done
+    await asyncio.gather(*tasks)  # await completion of all API calls
 
 
 if __name__ ==  '__main__':
     with Timer(text="-----\n{:.2f}s total elapsed time for PubChem API calls"):
         loop = asyncio.get_event_loop()
         try:
-            loop.run_until_complete(main())
+            loop.run_until_complete(run_tasks())
         finally:
             loop.run_until_complete(loop.shutdown_asyncgens())
             loop.close()
