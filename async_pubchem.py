@@ -268,4 +268,5 @@ def main():
     print(f"{a=}")
 
 if __name__ == "__main__":
+    print(rdkit.logging)
     main()

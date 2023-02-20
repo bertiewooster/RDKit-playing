@@ -118,7 +118,8 @@ async def is_commercially_available(smiles):
             reactant.commercially_available = False
         else:
             reactant.commercially_available = True
-        print(f"{str(reactant)=}")   
+        print(f"{str(reactant)=}")
+    return reactant
 
 sem = asyncio.Semaphore(2)
 
@@ -127,21 +128,39 @@ async def safe_calls(smiles):
         return await is_commercially_available(smiles)
 
 
-async def check_avail_smiles_set(smiles_list):
-    smiles_set = set(smiles_list)
-    tasks = [asyncio.ensure_future(safe_calls(smiles)) for smiles in smiles_set]
-    await asyncio.gather(*tasks)  # await completion of all API calls
+async def check_avail_smiles_set(smiles_set):
+    """
+    Feed asynchronous queue to check the availability of several SMILES strings (chemicals) in PubChem
+    Based on https://realpython.com/python-async-features/#asynchronous-non-blocking-http-calls
+
+    :param smiles_set: Set of SMILES strings (representing molecules)
+    :returns: dictionary of SMILES:reactant pairs, where reactant is class Reactant
+    """
+    with Timer(text="-----\n{:.2f}s total elapsed time for PubChem API calls"):
+        tasks = [asyncio.ensure_future(safe_calls(smiles)) for smiles in smiles_set]
+        reactants = await asyncio.gather(*tasks)  # await completion of all API calls
+
+    # Put reactants in dictionary of SMILES:Reaction object
+    smiles_avail = dict()
+    for index, reactant in enumerate(reactants):
+        # print(f"Reactant {index}: {reactant}, {reactant.smiles}, in_pubchem: {reactant.in_pubchem}, commercially_available: {reactant.commercially_available}")
+        smiles_avail[reactant.smiles] = reactant
+    
+    return smiles_avail        
 
 
 def check_avail_smiles_list(smiles_list):
-    with Timer(text="-----\n{:.2f}s total elapsed time for PubChem API calls"):
-        loop = asyncio.get_event_loop()
-        try:
-            loop.run_until_complete(check_avail_smiles_set(smiles_list))
-        finally:
-            loop.run_until_complete(loop.shutdown_asyncgens())
-            loop.close()
+    """Check whether each SMILES in a list is commercially available
+    
+    :param smiles_list: List of SMILES strings (representing molecules)
+    :returns: dictionary of SMILES:reactant pairs, where reactant is class Reactant
+    """
+    smiles_set = set(smiles_list)
+
+    smiles_avail = asyncio.run(check_avail_smiles_set(smiles_set))
+    return smiles_avail
 
 if __name__ ==  '__main__':
     smiles_list = ["C", "CC", "CCC", "CCCC", "CCCCC", "CCCCCC"]
-    check_avail_smiles_list(smiles_list)
+    result = check_avail_smiles_list(smiles_list)
+    print(f"{result=}")

@@ -1,0 +1,278 @@
+rownames,SMILES,BP
+bromo-trichloro-methane,C(Br)(Cl)(Cl)Cl,378.0
+chloro-trifluoro-methane,ClC(F)(F)F,191.7
+carbon tetrachloride,C(Cl)(Cl)(Cl)Cl,349.8
+tetrafluoromethane,C(F)(F)(F)F,145.1
+bromoform,BrC(Br)Br,422.3
+chloro-difluoro-methane,C(Cl)(F)F,232.3
+dichloro-fluoro-methane,C(Cl)(Cl)F,282.0
+chloroform,C(Cl)(Cl)Cl,334.3
+fluoroform,C(F)(F)F,191.0
+dibromomethane,C(Br)Br,370.1
+dichloromethane,C(Cl)Cl,312.9
+difluoromethane,C(F)F,221.5
+diiodomethane,C(I)I,455.2
+formaldehyde,O=C,254.0
+formic acid,C(=O)O,373.7
+bromomethane,CBr,276.7
+chloromethane,CCl,248.9
+fluoromethane,CF,194.8
+iodomethane,CI,315.6
+methanol,CO,337.8
+methanethiol,CS,279.1
+"1,1-dichloro-1,2,2,2-tetrafluoro-ethane",C(C(F)(F)F)(Cl)(Cl)F,276.2
+"1,1,1,2,2,2-hexafluoroethane",C(C(F)(F)F)(F)(F)F,194.9
+"2,2-dichloro-1,1,1-trifluoro-ethane",C(C(Cl)Cl)(F)(F)F,301.0
+"1,1,2-trichloroethylene",C(=C(Cl)Cl)Cl,360.1
+"2,2,2-trichloroacetaldehyde",C(C=O)(Cl)(Cl)Cl,370.8
+"1,1,1,2,2-pentachloroethane",C(C(Cl)(Cl)Cl)(Cl)Cl,433.0
+"1,1,1,2,2-pentafluoroethane",C(C(F)(F)F)(F)F,225.1
+"1,1,2,2-tetrabromoethane",C(C(Br)Br)(Br)Br,516.7
+"1,1,1,2-tetrachloroethane",C(CCl)(Cl)(Cl)Cl,403.7
+"1,1,2,2-tetrachloroethane",C(C(Cl)Cl)(Cl)Cl,418.3
+"1,1-difluoroethylene",C=C(F)F,187.5
+"1,1,2,2-tetrafluoroethane",C(C(F)F)(F)F,250.1
+bromoethylene,C=CBr,288.9
+acetyl chloride,CC(=O)Cl,323.9
+"1,1,1-trichloroethane",CC(Cl)(Cl)Cl,347.2
+"1,1,2-trichloroethane",C(CCl)(Cl)Cl,387.0
+fluoroethylene,C=CF,200.9
+"1,1,1-trifluoroethane",CC(F)(F)F,225.8
+"1,1-dibromoethane",CC(Br)Br,381.1
+"1,2-dibromoethane",C(CBr)Br,404.5
+"1,1-dichloroethane",C(C)(Cl)Cl,330.4
+"1,2-dichloroethane",C(CCl)Cl,356.6
+"1,1-difluoroethane",CC(F)F,247.4
+"1,2-difluoroethane",C(CF)F,283.6
+acetic acid,CC(=O)O,391.1
+formic acid methyl ester,COC=O,304.9
+bromoethane,CCBr,311.5
+chloroethane,CCCl,285.4
+fluoroethane,CCF,235.4
+iodoethane,CCI,345.4
+methoxymethane,COC,248.3
+ethanol,CCO,351.4
+ethylene glycol,OCCO,470.5
+(methylthio)methane,CSC,310.5
+ethanethiol,CCS,308.2
+methyldisulfanylmethane,CSSC,382.9
+"ethane-1,2-dithiol",SCCS,419.2
+2-chloroprop-1-ene,CC(=C)Cl,295.8
+"1,2,3-trichloropropane",C(C(CCl)Cl)Cl,430.0
+"(2R)-1,2-dichloropropane",C(C(C)Cl)Cl,369.5
+acetone,CC(=O)C,329.4
+propionaldehyde,CCC=O,321.1
+(2R)-2-methyloxirane,CC1CO1,307.6
+formic acid ethyl ester,CCOC=O,327.5
+acetic acid methyl ester,CC(=O)OC,330.1
+propionic acid,CCC(=O)O,414.3
+1-bromopropane,C(CC)Br,344.1
+2-chloropropane,CC(C)Cl,308.8
+1-chloropropane,CCCCl,319.7
+2-iodopropane,CC(C)I,362.6
+1-iodopropane,CCCI,375.6
+propan-2-ol,CC(C)O,355.4
+methoxyethane,CCOC,280.5
+propan-1-ol,CCCO,370.4
+"(2R)-propane-1,2-diol",CC(O)CO,460.8
+"propane-1,3-diol",C(CCO)O,487.6
+propane-2-thiol,CC(C)S,325.7
+propane-1-thiol,CCCS,340.9
+furan,c1ccco1,304.5
+thiophene,c1cccs1,357.3
+"2,5-dihydrofuran",C1C=CCO1,339.0
+methacrylic acid,CC(=C)C(=O)O,434.2
+"(2R)-1,2-dichlorobutane",C(C(CC)Cl)Cl,397.1
+"(2S,3R)-2,3-dichlorobutane",CC(C(C)Cl)Cl,392.6
+butyraldehyde,C(=O)CCC,348.0
+butan-2-one,CCC(=O)C,352.8
+2-methylpropionaldehyde,CC(C)C=O,337.3
+tetrahydrofuran,O1CCCC1,339.1
+butyric acid,CCCC(=O)O,436.4
+acetic acid ethyl ester,CCOC(=O)C,350.2
+isobutyric acid,CC(C)C(=O)O,427.7
+propionic acid methyl ester,COC(=O)CC,352.6
+formic acid propyl ester,CCCOC=O,354.0
+tetrahydrothiophene,S1CCCC1,394.3
+1-bromobutane,C(CCC)Br,374.8
+(2S)-2-bromobutane,CC(CC)Br,364.4
+1-chlorobutane,CCCCCl,351.6
+(2S)-2-chlorobutane,CC(CC)Cl,341.3
+2-chloro-2-methyl-propane,CC(C)(C)Cl,323.8
+1-chloro-2-methyl-propane,CC(C)CCl,342.0
+butan-1-ol,CCCCO,390.8
+(2S)-butan-2-ol,CC(CC)O,372.7
+ethoxyethane,CCOCC,307.6
+2-methylpropan-1-ol,C(C(C)C)O,380.8
+2-methylpropan-2-ol,CC(C)(C)O,355.6
+1-methoxypropane,CCCOC,312.2
+"(3R)-butane-1,3-diol",OCCC(C)O,480.2
+"butane-1,4-diol",OCCCCO,501.2
+"(2R,3S)-butane-2,3-diol",CC(O)C(O)C,453.9
+"2-methylpropane-1,3-diol",C(C(CO)C)O,487.2
+butane-1-thiol,CCCCS,371.6
+(2S)-butane-2-thiol,CCC(S)C,358.1
+2-methylpropane-2-thiol,CC(C)(C)S,337.4
+2-methylpropane-1-thiol,CC(C)CS,361.6
+1-(methylthio)propane,CSCCC,368.7
+2-methylthiophene,c1cc(sc1)C,385.7
+3-methylbutan-2-one,CC(C)C(=O)C,367.5
+valeraldehyde,CCCCC=O,376.1
+pentan-2-one,CCCC(=O)C,375.5
+pentan-3-one,CCC(=O)CC,375.1
+formic acid butyl ester,CCCCOC=O,379.3
+formic acid sec-butyl ester,CC(CC)OC=O,366.5
+formic acid tert-butyl ester,CC(C)(C)OC=O,356.0
+propionic acid ethyl ester,CCOC(=O)CC,372.3
+formic acid isobutyl ester,CC(C)COC=O,371.2
+acetic acid isopropyl ester,CC(=O)OC(C)C,361.6
+butyric acid methyl ester,CCCC(=O)OC,375.9
+3-methylbutyric acid,CC(C)CC(=O)O,448.3
+"2,2-dimethylpropionic acid",CC(C)(C)C(=O)O,437.0
+valeric acid,CCCCC(=O)O,458.9
+acetic acid propyl ester,CCCOC(=O)C,374.6
+1-chloropentane,CCCCCCl,381.5
+"2,2-dimethylpropan-1-ol",C(C(C)(C)C)O,386.3
+2-ethoxypropane,CCOC(C)C,326.1
+1-ethoxypropane,CCOCCC,337.0
+(2R)-2-methylbutan-1-ol,C(C(CC)C)O,401.9
+2-methylbutan-2-ol,CC(CC)(C)O,375.1
+3-methylbutan-1-ol,C(CC(C)C)O,404.4
+(2S)-3-methylbutan-2-ol,CC(C(C)C)O,384.6
+1-methoxybutane,CCCCOC,343.4
+(2R)-2-methoxybutane,CCC(C)OC,332.1
+2-methoxy-2-methyl-propane,CC(C)(C)OC,328.4
+pentan-1-ol,C(CCCC)O,410.9
+(2S)-pentan-2-ol,CC(CCC)O,392.1
+pentan-3-ol,CCC(CC)O,388.4
+"pentane-1,5-diol",OCCCCCO,512.2
+1-(methylthio)butane,CSCCCC,396.6
+2-methyl-2-(methylthio)propane,CSC(C)(C)C,372.0
+pentane-1-thiol,CCCCCS,399.8
+"1,2,3,4,5,6-hexachlorobenzene",c1(c(c(c(c(c1Cl)Cl)Cl)Cl)Cl)Cl,582.6
+"1,2,3,4,5,6-hexafluorobenzene",c1(c(c(c(c(c1F)F)F)F)F)F,353.4
+"1,2,4-trichlorobenzene",c1cc(c(cc1Cl)Cl)Cl,486.2
+"1,3-dichlorobenzene",c1c(cccc1Cl)Cl,446.2
+"1,2-dichlorobenzene",c1(ccccc1Cl)Cl,453.6
+"1,4-dichlorobenzene",c1(ccc(cc1)Cl)Cl,447.2
+3-chlorophenol,c1ccc(cc1O)Cl,487.0
+2-chlorophenol,c1cccc(c1O)Cl,447.5
+4-chlorophenol,c1cc(ccc1O)Cl,493.1
+phenol,c1(ccccc1)O,455.0
+pyrocatechol,c1(ccccc1O)O,518.7
+resorcinol,c1(cccc(c1)O)O,549.7
+hydroquinone,c1cc(ccc1O)O,558.2
+cyclohexanone,C1CCC(=O)CC1,428.9
+3-ketobutyric acid ethyl ester,CC(=O)CC(=O)OCC,454.0
+oxalic acid diethyl ester,CCOC(=O)C(=O)OCC,458.9
+cyclohexanol,C1CCC(CC1)O,434.0
+pinacolone,CC(=O)C(C)(C)C,379.4
+2-methylpentan-3-one,CC(C)C(=O)CC,386.5
+hexanal,CCCCCC=O,401.5
+hexan-2-one,CC(=O)CCCC,400.9
+hexan-3-one,CCC(=O)CCC,396.6
+4-methylpentan-2-one,CC(=O)CC(C)C,389.6
+(3S)-3-methylpentan-2-one,CC(=O)C(C)CC,390.6
+acetic acid butyl ester,CC(=O)OCCCC,399.1
+acetic acid sec-butyl ester,CC(=O)OC(C)CC,385.1
+acetic acid tert-butyl ester,CC(=O)OC(C)(C)C,369.1
+butyric acid ethyl ester,CCCC(=O)OCC,394.6
+2-ethylbutyric acid,CCC(CC)C(=O)O,466.9
+2-methylpropionic acid ethyl ester,CCOC(=O)C(C)C,383.0
+hexanoic acid,CCCCCC(=O)O,478.8
+acetic acid isobutyl ester,CC(=O)OCC(C)C,389.8
+formic acid amyl ester,CCCCCOC=O,405.5
+propionic acid propyl ester,CCCOC(=O)CC,395.6
+1-ethoxybutane,CCOCCCC,365.3
+2-ethoxy-2-methyl-propane,CCOC(C)(C)C,346.0
+2-isopropoxypropane,CC(C)OC(C)C,341.5
+2-ethylbutan-1-ol,CCC(CC)CO,419.7
+hexan-1-ol,CCCCCCO,430.6
+(2S)-hexan-2-ol,CC(CCCC)O,413.0
+(2R)-2-methylpentan-1-ol,C(C(CCC)C)O,421.2
+(2S)-4-methylpentan-2-ol,CC(CC(C)C)O,404.9
+1-methoxypentane,CCCCCOC,372.0
+"hexane-1,6-diol",OCCCCCCO,516.2
+"(4R)-2-methylpentane-2,4-diol",CC(CC(C)O)(C)O,470.6
+1-(propylthio)propane,CCCSCCC,416.0
+2-(ethylthio)-2-methyl-propane,CCSC(C)(C)C,393.6
+hexane-1-thiol,CCCCCCS,425.8
+1-propyldisulfanylpropane,CCCSSCCC,469.0
+trichloromethylbenzene,c1ccccc1C(Cl)(Cl)Cl,486.7
+dichloromethylbenzene,c1(ccccc1)C(Cl)Cl,487.0
+benzoic acid,c1ccccc1C(=O)O,522.4
+4-hydroxybenzaldehyde,c1cc(ccc1O)C=O,583.2
+2-hydroxybenzaldehyde,c1(ccccc1O)C=O,469.7
+chloromethylbenzene,c1ccccc1CCl,452.6
+phenylmethanol,c1(ccccc1)CO,477.9
+m-cresol,c1ccc(cc1O)C,475.4
+o-cresol,c1cccc(c1O)C,464.2
+p-cresol,c1cc(ccc1O)C,475.1
+malonic acid diethyl ester,CCOC(=O)CC(=O)OCC,472.0
+"2,4-dimethylpentan-3-one",CC(C)C(=O)C(C)C,397.6
+enanthaldehyde,CCCCCCC=O,426.0
+heptan-2-one,CC(=O)CCCCC,424.0
+heptan-4-one,CCCC(=O)CCC,417.2
+1-methylcyclohexan-1-ol,C1(CCCCC1)(C)O,441.2
+5-methylhexan-2-one,CC(=O)CCC(C)C,418.0
+propionic acid butyl ester,CCCCOC(=O)CC,419.8
+3-methylbutyric acid ethyl ester,CC(C)CC(=O)OCC,407.5
+enanthic acid,CCCCCCC(=O)O,496.2
+formic acid hexyl ester,CCCCCCOC=O,428.6
+butyric acid propyl ester,CCCC(=O)OCCC,416.5
+heptan-1-ol,CCCCCCCO,449.5
+(2S)-heptan-2-ol,CC(CCCCC)O,432.4
+5-methylhexan-1-ol,C(CCCC(C)C)O,445.2
+heptane-1-thiol,CCCCCCCS,450.1
+4-hydroxy-3-methoxy-benzaldehyde,c1cc(c(cc1C=O)OC)O,558.0
+4-ethylphenol,c1cc(ccc1CC)O,491.1
+"2,3-xylenol",c1(c(cccc1C)O)C,490.1
+"2,4-xylenol",c1cc(cc(c1O)C)C,484.1
+"2,5-xylenol",c1c(ccc(c1O)C)C,484.3
+"2,6-xylenol",c1c(c(c(cc1)C)O)C,474.2
+"3,4-xylenol",c1(cc(ccc1C)O)C,500.2
+"3,5-xylenol",c1c(cc(cc1O)C)C,494.9
+(Z)-but-2-enedioic acid diethyl ester,CCOC(=O)C=CC(=O)OCC,498.2
+caprylaldehyde,CCCCCCCC=O,447.2
+octan-2-one,CCCCCCC(=O)C,445.8
+butyric acid butyl ester,CCCCOC(=O)CCC,438.2
+formic acid heptyl ester,CCCCCCCOC=O,451.3
+acetic acid hexyl ester,CCCCCCOC(=O)C,444.7
+2-methylpropionic acid isobutyl ester,CC(C)COC(=O)C(C)C,420.6
+(2R)-2-sec-butoxybutane,CCC(C)OC(C)CC,394.2
+(2R)-2-ethylhexan-1-ol,C(C(CCCC)CC)O,457.8
+octan-1-ol,C(CCCCCCC)O,468.3
+(2S)-octan-2-ol,CC(CCCCCC)O,453.0
+octane-1-thiol,CCCCCCCCS,472.2
+benzoic acid ethyl ester,c1(ccccc1)C(=O)OCC,486.6
+ethoxymethylbenzene,c1cccc(c1)COCC,458.1
+"3,5,5-trimethylcyclohex-2-en-1-one",C1(CC(=O)C=C(C1)C)(C)C,488.4
+"2,6-dimethylheptan-4-one",CC(C)CC(=O)CC(C)C,441.4
+nonan-2-one,CCCCCCCC(=O)C,467.5
+nonan-5-one,CCCCC(=O)CCCC,461.6
+acetic acid heptyl ester,CCCCCCCOC(=O)C,465.6
+pelargonic acid,CCCCCCCCC(=O)O,528.8
+formic acid octyl ester,CCCCCCCCOC=O,472.0
+"2,6-dimethylheptan-4-ol",CC(C)CC(CC(C)C)O,451.0
+nonan-1-ol,CCCCCCCCCO,486.3
+(2R)-nonan-2-ol,CCCCCCCC(C)O,471.7
+nonane-1-thiol,CCCCCCCCCS,493.0
+"benzene-1,2-dicarboxylic acid dimethyl ester",c1cccc(c1C(=O)OC)C(=O)OC,556.8
+anethole,CC=Cc1ccc(cc1)OC,508.5
+4-tert-butylphenol,c1(ccc(cc1)C(C)(C)C)O,512.9
+capric acid,CCCCCCCCCC(=O)O,543.2
+3-methylbutyric acid isoamyl ester,CC(C)CCOC(=O)CC(C)C,467.2
+acetic acid octyl ester,CCCCCCCCOC(=O)C,484.5
+decan-1-ol,CCCCCCCCCCO,504.1
+decane-1-thiol,CCCCCCCCCCS,512.3
+acrylic acid [(2R)-2-ethylhexyl] ester,C=CC(=O)OCC(CCCC)CC,489.2
+undecanoic acid,CCCCCCCCCCC(=O)O,557.4
+capric acid methyl ester,CCCCCCCCCC(=O)OC,505.0
+undecan-1-ol,CCCCCCCCCCCO,518.2
+"benzene-1,2-dicarboxylic acid diethyl ester",c1cccc(c1C(=O)OCC)C(=O)OCC,567.2
+acetic acid decyl ester,CCCCCCCCCCOC(=O)C,517.2
+lauric acid,CCCCCCCCCCCC(=O)O,571.9
+1-hexoxyhexane,CCCCCCOCCCCCC,498.9
+tridecanoic acid,CCCCCCCCCCCCC(=O)O,585.3
+"9,10-anthraquinone",c1cccc2c1C(=O)c3c(cccc3)C2=O,653.1
+"4-(1,1,3,3-tetramethylbutyl)phenol",c1cc(ccc1C(C)(C)CC(C)(C)C)O,563.6
