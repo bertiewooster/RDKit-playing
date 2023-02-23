@@ -8,6 +8,7 @@ import polars as pl
 import pubchempy as pcp
 from pypdf import PdfReader
 from rdkit import Chem
+from rdkit.Chem import Descriptors
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
@@ -16,12 +17,50 @@ ssl._create_default_https_context = ssl._create_unverified_context
 # page = reader.pages[1]
 # text = page.extract_text()
 
+def wiener_index(m):
+    res = 0
+    amat = Chem.GetDistanceMatrix(m)
+    num_atoms = m.GetNumAtoms()
+    for i in range(num_atoms):
+        for j in range(i+1, num_atoms):
+            res += amat[i][j]
+    return res
+
+def CalculatePolarityNumber(mol):
+    """
+    #################################################################
+    Copyright BSD 3-Clause "New" or "Revised" License
+    Author : gadsbyfly 
+    https://codesuche.com/view-source/python/gadsbyfly/PyBioMed/
+
+    Calculation of Polarity number.
+    
+    It is the number of pairs of vertexes at
+    
+    distance matrix equal to 3
+    
+    ---->Pol
+    
+    Usage: 
+        
+        result=CalculatePolarityNumber(mol)
+        
+        Input: mol is a molecule object
+        
+        Output: result is a numeric value
+    #################################################################
+    """
+    Distance = Chem.GetDistanceMatrix(mol)
+    res = 1./2*sum(sum(Distance==3))
+    
+    return res
+
 def get_canonical_smiles(name):
     for compound in pcp.get_compounds(name, 'name'):
         print(f"{molecule} {compound.canonical_smiles}")
         if compound.canonical_smiles == "null":
             print(f"  {name} returned Null for canonical_smiles")
-        time.sleep(0.5)
+        # time.sleep(0.5)
         return compound.canonical_smiles
 
 # Fix data from tables
@@ -40,7 +79,10 @@ with open("data/wiener_table_III.txt") as f:
 # We added the comma to print single newlines and not double newlines.
 # This is because the lines contain the newline character '\n'.
 ignore_line_chars = (".", ",")
-for line in content:
+# for line in content:
+
+# Temporarily cutting down dataset size during coding
+for line in content[0:2]:
     if line[0] not in ignore_line_chars:
         end_marker = "ane "
         end_of_molecule = line.find(end_marker) + len(end_marker)
@@ -72,11 +114,18 @@ df = df.with_columns([
 
 # print(df)
 
-# df = df.with_columns([
-#     pl.col('SMILES').apply(lambda s: Chem.MolFromSmiles(s)).alias('mol'),
-# ])
+df = df.with_columns([
+    pl.col('SMILES').apply(lambda s: Chem.MolFromSmiles(s)).alias('mol'),
+])
 
-# print(df)
+df = df.with_columns([
+    pl.col('mol').apply(lambda m: Chem.MolToSmiles(m)).alias('CanonicalSMILES'),
+    pl.col('mol').apply(lambda m: Descriptors.MolWt(m)).alias('MolWt'),
+    pl.col('mol').apply(lambda m: wiener_index(m)).alias('omega0'),
+    pl.col('mol').apply(lambda m: CalculatePolarityNumber(m)).alias('p0'),
+])
+
+print(df)
 
 
 # smiless = []

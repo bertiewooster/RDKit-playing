@@ -35,7 +35,8 @@ def wiener_index(m):
 df = df.with_columns([
     pl.col('mol').apply(lambda m: Chem.MolToSmiles(m)).alias('CanonicalSMILES'),
     pl.col('mol').apply(lambda m: Descriptors.MolWt(m)).alias('MolWt'),
-    pl.col('mol').apply(lambda m: wiener_index(m)).alias('Wiener_Index'),
+    pl.col('mol').apply(lambda m: wiener_index(m)).alias('omega0'),
+    pl.col('mol').apply(lambda m: CalculatePolarityNumber(m)).alias('p0'),
 ])
 print(df)
 
