@@ -1,4 +1,3 @@
-import pandas
 import polars as pl
 import pyreadr
 from rdkit import Chem
@@ -39,3 +38,5 @@ df = df.with_columns([
     pl.col('mol').apply(lambda m: wiener_index(m)).alias('Wiener_Index'),
 ])
 print(df)
+
+print(df["SMILES"])
