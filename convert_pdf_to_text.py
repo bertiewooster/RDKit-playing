@@ -1,16 +1,28 @@
 import asyncio
 import re
 import ssl
+import time
 
 import aiohttp
 import polars as pl
 import pubchempy as pcp
 from pypdf import PdfReader
+from rdkit import Chem
 
-reader = PdfReader("Journal articles/Wiener index ja01193a005.pdf")
-number_of_pages = len(reader.pages)
-page = reader.pages[1]
-text = page.extract_text()
+ssl._create_default_https_context = ssl._create_unverified_context
+
+# reader = PdfReader("Journal articles/Wiener index ja01193a005.pdf")
+# number_of_pages = len(reader.pages)
+# page = reader.pages[1]
+# text = page.extract_text()
+
+def get_canonical_smiles(name):
+    for compound in pcp.get_compounds(name, 'name'):
+        print(f"{molecule} {compound.canonical_smiles}")
+        if compound.canonical_smiles == "null":
+            print(f"  {name} returned Null for canonical_smiles")
+        time.sleep(0.5)
+        return compound.canonical_smiles
 
 # Fix data from tables
 # Convert these characters
@@ -30,26 +42,47 @@ with open("data/wiener_table_III.txt") as f:
 ignore_line_chars = (".", ",")
 for line in content:
     if line[0] not in ignore_line_chars:
-        end_of_molecule = line.find("ane ")
+        end_marker = "ane "
+        end_of_molecule = line.find(end_marker) + len(end_marker)
         no_spaces_in_molecule = line[:end_of_molecule].replace(" ", "")
-        molecule_clean = no_spaces_in_molecule.replace("«", "n").replace("^", "2")
-        line_clean = molecule_clean + line[end_of_molecule:]
+        # print(f"{no_spaces_in_molecule=}")
+        molecule_clean = no_spaces_in_molecule.replace("«", "n").replace("^", "2").replace("!", "l").replace("Ihexane", "lhexane").replace("Ioctane", "loctane").replace("Iheptane", "lheptane")
+        print(f"{molecule_clean=}")
 
-        words = line_clean.split()
-        molecule = words[0]
-        tobs = words[1]
-        molecules.append(molecule)
+        words = line[end_of_molecule:].split()
+        tobs = words[0]
+        molecules.append(molecule_clean)
         tobss.append(tobs)
 
-dataframe = pl.DataFrame({"molecules": molecules,
+df = pl.DataFrame({"molecules": molecules,
                           "tobss": tobss})
 
-print(dataframe)
+print(df)
 
-a_molecule = dataframe["molecules"][0]
+print(df["molecules"])
 
-ssl._create_default_https_context = ssl._create_unverified_context
+for molecule in df["molecules"]:
+    s = get_canonical_smiles(molecule)
+    if s == "null":
+        print(f"{molecule} {s}")
 
-for compound in pcp.get_compounds(a_molecule, 'name'):
-    print(compound.isomeric_smiles)
-    compound
+df = df.with_columns([
+    pl.col('molecules').apply(lambda s: get_canonical_smiles(s)).alias('SMILES'),
+])
+
+# print(df)
+
+# df = df.with_columns([
+#     pl.col('SMILES').apply(lambda s: Chem.MolFromSmiles(s)).alias('mol'),
+# ])
+
+# print(df)
+
+
+# smiless = []
+# mols = []
+# wieners = []
+# polarities = []
+
+# for mol in mols:
+#     wieners = 
