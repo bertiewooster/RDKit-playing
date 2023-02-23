@@ -1,15 +1,16 @@
+import asyncio
 import re
+import ssl
 
+import aiohttp
 import polars as pl
+import pubchempy as pcp
 from pypdf import PdfReader
 
 reader = PdfReader("Journal articles/Wiener index ja01193a005.pdf")
 number_of_pages = len(reader.pages)
 page = reader.pages[1]
 text = page.extract_text()
-
-# print(number_of_pages)
-# print(text)
 
 # Fix data from tables
 # Convert these characters
@@ -29,7 +30,6 @@ with open("data/wiener_table_III.txt") as f:
 ignore_line_chars = (".", ",")
 for line in content:
     if line[0] not in ignore_line_chars:
-        # TODO Remove any spaces before "ane "
         end_of_molecule = line.find("ane ")
         no_spaces_in_molecule = line[:end_of_molecule].replace(" ", "")
         molecule_clean = no_spaces_in_molecule.replace("«", "n").replace("^", "2")
@@ -46,3 +46,10 @@ dataframe = pl.DataFrame({"molecules": molecules,
 
 print(dataframe)
 
+a_molecule = dataframe["molecules"][0]
+
+ssl._create_default_https_context = ssl._create_unverified_context
+
+for compound in pcp.get_compounds(a_molecule, 'name'):
+    print(compound.isomeric_smiles)
+    compound
