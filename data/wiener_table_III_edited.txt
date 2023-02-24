@@ -1,0 +1,70 @@
+«-Nonane 150.8 0 0 150.8 0.0
+2-Methyloctane 143.3 6 0 143 .5 _2
+3-Methyloctane 144.2 10 -1 144.2 .0
+4-MethyIoctane 142.5 12 -1 141.8_.7
+3-Ethylheptane 143.0 .16 _2 142 .5-
+.5
+4-EthyIheptane 141.2 18 -2 140.0 -1.2
+^,2-Dimethylheptane 130.5 16 0 131.4 0.9
+2,3-Dimethylheptane 140.5 18_2 140.0—
+.5
+2,4-Dimethylheptane 133 18 -1 134 .5 1 .5
+2,5-Dimethylheptane 136 16 -1 136.9 0.9
+2,6-Dimethylheptane 135.2 12 0 136.3 1.1
+3,3-Dimethylheptane 137.3 22 -2 135.2 -2.1
+3,4-Dimethylheptane 140.5 22 -3 140.7 0.2
+3,5-Dimethylheptane Null 20 -2 137.6
+4,4-Dimethylheptane Null 24 -2 132.8
+2-Methyl-3-ethylhexane 139 24 -3 138.3-
+.7
+2-Methyl-4-ethylhexane Null 22 -2 135.2
+3-Methyl-3-ethylhexane Null 28 -4 139,0
+3-Methyl-4-ethylhexane Null 26 -4 141.4
+2,2,3-Trimethylhexane 133.4 28—3 133.4 .0
+2,2,4-Trimethylhexane 126.5 26 -1 124 .8-1 .7
+2,2,5-Trimethylhexane 124.1 22 Ü 124.2 0 .1
+2,3,3-Trimethylhexane 138 30 -4 136 .5 -1 .5
+2,3,4-Trimethylhexane Null 28 -4 139.0
+2,3,5-Trimethylhexane 131.4 24~2 132.8 1.4
+2,4,4-Trimethylhexane 131 28—2 127.9 -3.1
+3,3,4-Trimethylhexane 139 32 -5 139,0 0.6
+3,3-Diethylpentane 146.5 32—6 145, .1 -1.4
+2,2-Dimethyl-3-ethylpentane 133.8 32 -4 134..1 0.3
+2,3-DimethyI-3-ethylpentane 142 34 -6 142. ,7 .7
+2,4-Dimethyl-3-ethylpentane 136.7 30—4 136, .0-
+..2
+2,2,3,3-Tetramethylpentane 140.2 38 -6 137..8 -2.4
+2,2,3,4-Tetramethylpentane 133.0 34 -4 131. ,7 -1.3
+2,2,4,4-Tetramethylpentane 122.3 32 0 112. 1 -10. .2
+2,3,3,4-Tetramethylpentane 141.5 36 -6 140. .2 -1..3
+«-Decane 174.0 0 0 174. 0 Ü..0
+2-Methytnonane 166.8 7 0 167. 1 .3
+3-Methylnonane 167.8 12-1 167. 7-
+,,1
+4-Methylnonane 165.7 15—1 164. 8-
+.9
+5-Methylnonane 165.1 10.-1 163. 8 -1..3
+2,4-Dimethyloctane 153.2 23 -1 157. 0 3..8
+2,5-Dimethyloctane 159 22 -1 157. 9 -1.,1
+2,6-Dimethyloctane 160 19 -1 160. 9 0..9
+2,7-Dimethyloctane 160.2 14 0 160. 3 .1
+3,3-Dimethyloctane 161.2 27—2 158. 5 -2. 7
+3,6-Dimethyloctane 160.8 24—2 161. 5 0.7
+4,5-Dimethyloctane 101.0 30 -3 161. 1 1
+4-w-Propylheptane 161.7 27 -2 158. 5 -3. 2
+4-Isopropylheptane 158.6 34 -3 157. 2 -1. 4
+2-Methyl-5-ethylheptane 158.4 27—2 158. 5 0.1
+3-Methyl-3-ethylheptane 156.3 36—4 160. 7 4.4
+2,2,4-Trimethylheptane 147 34 -1 146. 2 -0. 8
+2,2,6-Trimethylheptane 148.9 26 0 148. 5-
+.4
+2,3,3-Trimethylheptane 160 38 -4 158. 8 -1. 2
+2,3,6-T rimethylheptane 155.3 29 -2 156. 6 1.3
+2,4,4-Trimethylheptane 151 38 _2 147. 8 -3. 2
+2,4,6-Trimethylheptane 147.6 30 -1 150. 1 2,5
+2,5,5-Trimethylheptane 152.8 34 -2 lot. 7-1 .1
+3,4-DiethyIhexane 160.7 40—5 162. 3 1.6
+2,2-Dimethyl-4-ethylhexane 148 39—2 146. S -1. 2
+2,2,3,4-Tetramethylhexane 156.5 47—5 155. 4 -1. 1
+2,2,4,5-T etrame thy! hexane 145.8 41 -2 144. 8 -1. 0
+2,2,5,5-TetramethyIhexane 136.8 38 0 136. 8 0.0

@@ -12,10 +12,13 @@ from rdkit.Chem import Descriptors
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
-# reader = PdfReader("Journal articles/Wiener index ja01193a005.pdf")
-# number_of_pages = len(reader.pages)
-# page = reader.pages[1]
-# text = page.extract_text()
+reader = PdfReader("Journal articles/Wiener index ja01193a005.pdf")
+number_of_pages = len(reader.pages)
+page = reader.pages[2]
+text = page.extract_text()
+
+with open('data/wiener_page_2.txt', 'w') as f:
+    f.write(text)
 
 def wiener_index(m):
     res = 0
@@ -55,11 +58,19 @@ def CalculatePolarityNumber(mol):
     
     return res
 
+# Calculate delta t using Wiener equation 4
+def calc_delta_t(n, delta_omega, delta_p):
+    return (98/(n**2) * delta_omega) + (5.5 * delta_p)
+
+# delta_t = calc_delta_t(4, 1, 1) # should give 11.625; does
+# delta_t = calc_delta_t(8, 26, -4) # should give 17.8; does
+delta_t = calc_delta_t(8, 26, -4) # should give 17.8; does
+
 def get_canonical_smiles(name):
     for compound in pcp.get_compounds(name, 'name'):
-        print(f"{molecule} {compound.canonical_smiles}")
-        if compound.canonical_smiles == "null":
-            print(f"  {name} returned Null for canonical_smiles")
+        print(f"{name} {compound.canonical_smiles}")
+        # if compound.canonical_smiles == "null":
+        #     print(f"  {name} returned Null for canonical_smiles")
         # time.sleep(0.5)
         return compound.canonical_smiles
 
@@ -72,7 +83,7 @@ def get_canonical_smiles(name):
 molecules = []
 tobss = []
 
-with open("data/wiener_table_III.txt") as f:
+with open("data/wiener_table_III_edited.txt") as f:
     content = f.readlines()
 
 # Show the file contents line by line.
@@ -81,6 +92,7 @@ with open("data/wiener_table_III.txt") as f:
 ignore_line_chars = (".", ",")
 # for line in content:
 
+# for line in content:
 # Temporarily cutting down dataset size during coding
 for line in content[0:2]:
     if line[0] not in ignore_line_chars:
@@ -89,10 +101,10 @@ for line in content[0:2]:
         no_spaces_in_molecule = line[:end_of_molecule].replace(" ", "")
         # print(f"{no_spaces_in_molecule=}")
         molecule_clean = no_spaces_in_molecule.replace("«", "n").replace("^", "2").replace("!", "l").replace("Ihexane", "lhexane").replace("Ioctane", "loctane").replace("Iheptane", "lheptane")
-        print(f"{molecule_clean=}")
 
         words = line[end_of_molecule:].split()
         tobs = words[0]
+        # print(f"{molecule_clean} {tobs}")
         molecules.append(molecule_clean)
         tobss.append(tobs)
 
@@ -101,12 +113,12 @@ df = pl.DataFrame({"molecules": molecules,
 
 print(df)
 
-print(df["molecules"])
+# print(df["molecules"])
 
-for molecule in df["molecules"]:
-    s = get_canonical_smiles(molecule)
-    if s == "null":
-        print(f"{molecule} {s}")
+# for molecule in df["molecules"]:
+#     s = get_canonical_smiles(molecule)
+#     if s == "null":
+#         print(f"{molecule} {s}")
 
 df = df.with_columns([
     pl.col('molecules').apply(lambda s: get_canonical_smiles(s)).alias('SMILES'),
@@ -123,7 +135,29 @@ df = df.with_columns([
     pl.col('mol').apply(lambda m: Descriptors.MolWt(m)).alias('MolWt'),
     pl.col('mol').apply(lambda m: wiener_index(m)).alias('omega0'),
     pl.col('mol').apply(lambda m: CalculatePolarityNumber(m)).alias('p0'),
+    pl.col('mol').apply(lambda m: m.GetNumAtoms()).alias('n'),
 ])
+
+linear_alkanes = pl.DataFrame({"compound": ["n-Butane", "n-Pentane", "n-Hexane", "n-Heptane", "n-Octane", "n-Nonane", "n-Decane", "n-Undecane", "n-Dodecane"], 
+                          "t0": [-0.5, 36.1, 68.7, 98.4, 125.7, 150.8, 174.0, 195.8, 216.2],
+                          "SMILES": ["CCCC", "CCCCC", "CCCCCC", "CCCCCCC", "CCCCCCCC", "CCCCCCCCC", "CCCCCCCCCC", "CCCCCCCCCCC", "CCCCCCCCCCCC"],
+                          "n": [4, 5, 6, 7, 8, 9, 10, 11, 12],
+                          "omega0": [10, 20, 35, 56, 84, 120, 165, 220, 286],
+                          "p0": [1, 2, 3, 4, 5, 6, 7, 8, 9],
+                          })
+
+omega0_n_hexane = linear_alkanes.filter(pl.col("n") == 6).select(["omega0"])
+n_hexane_omega0_p0 = linear_alkanes.filter(pl.col("n") == 6).select(["omega0", "p0"])
+
+# Copy in values from corresponding straight-chain alkane
+# df = df.with_columns([
+#     pl.col('n').apply(lambda s: Chem.MolFromSmiles(s)).alias('mol'),
+# ])
+
+# Calculate delta t values
+# df = df.with_columns([
+#     pl.struct(["n", "delta_omega", "delta_p"]).apply(lambda x: calc_delta_t(x["n"], x["delta_omega"], x["delta_p"])).alias("delta_t"),
+# ])
 
 print(df)
 

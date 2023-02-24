@@ -1,0 +1,37 @@
+ro-Butane 0.0 0 00.0 0.0
+2-Methylpropane 11.2 1 111.6-.4
+«-Pentane 0.0 0 00.0 .0
+2-Methylbutane 8.2 2 07.9 .3
+2,2-Dimethylpropane 26.6 4 226.7-.1
+«-Hexane 0.0 0 00.0 .0
+2-Methylpentane 8.5 3 08.2 .3
+3-Methylpentane 5.4 4-1 5.4 .0
+2,2-Dimethylbutane 19.0 7 019.0 .0
+2,3-Dimethylbutane 10.8 6-1 10.8 .0
+«-Heptane 0.0 0 00.0 .0
+2-Methylhexane 8.4 4 08.0 .4
+3-Methylhexane 6.5 6-1 6.5 .0
+3-Ethylpentane 5.0 8-2 5.0 .0
+2,2-Dimethylpentane 19.2 10 020.0-.8
+2,3-D imethylpentane 8.7 10 -2 9.0-.3
+2,4-Dimethylpentane 17.9 8 016.0 1.9
+3,3-Dimethylpentane 12.4 12 -2 13.0 -0.6
+2,2,3-Trimethylbutane 17.5 14 -2 17.0 .5
+«-Octane 0.0 0 00.0 .0
+2-Methylheptane 8.0 5 07.7 .3
+3-Methylheptane 6.7 8-1 6.7 .0
+4-Methylheptane 8.0 9-1 8.2-.2
+3-Ethylhexane 7.1 12 -2 7.3-.2
+2,2-Dimethylhexane 18.8 13 019.9 -1.1
+2,3-Dimethylhexane 10.1 14 -2 10.4 -0.3
+2,4-Dimethylhexane 16.2 13 -1 14.4 1.8
+2,5-Dimethylhexane 16.6 10 015.3 1.3
+3,3-Dimethylhexane 13.7 17-2 15.0 -1.3
+3,4-Dimethylhexane 8.0 16-3 8.0 0.0
+2-Methyl-3-ethylpentane 10.0 17-3 9.5 .5
+3-Methyl-3-ethylpentane 7.4 20 -4 8.6 -1.2
+2,2,3-Trimethylpentane 15.8 21 -3 15.7 0.1
+2,2,4-Trimethylpentaue 26.4 18 027.5 -1.1
+2,3,3-Trimethylpentane 10.9 22 -4 11.6 -0.7
+2,3,4-Triraethylpentane
+2,2,3,3-T etramethyl-butane 12.2 19-3 12.5-3

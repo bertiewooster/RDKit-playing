@@ -1,0 +1,119 @@
+Jan,, 1947 Structural Determination ofParaffin Boiling Points 19
+Table IV
+Cpd. ¿\w AP ¿caled.
+3-Ethyloctane 20 -2 165.4
+4-Ethyioctane 24 -2 161.5
+2,2-Dimethyloctane 19 0 155.4
+2,3·Di.ii thyloctane 22 -2 163.4
+3,!l)i.m-thyloetane 28 -3 163.1
+3,5iJimvtliyloctane 27 -2 158.5
+4,4-Dimethyloctane 31 -2 154.6
+2-Methyl-3-ethylheptane 31 -3 160.1
+2~Methyl-4-ethylheptane 31 -2 154.6
+3-Methyl-4-ethylheptane 36 -4 160.7
+3-Methyl-5-ethylheptane 32 -3 159.1
+4-Methyl-3 -ethylheptane 35 -4 161.7
+4-Methyl-4-ethylheptane 39 -4 157.8
+2,2,3-Trimethylheptane So -3 156.2
+2,2,5-Triraethylheptane 31 -1 149.1
+2,3,4-Trimethylheptane 37 -4 159.7
+2,3,5-Trimethylheptane 34 -3 157.2
+2,4,5-Trimethylheptane 35 -3 156.2
+3,3,4-Trimethylheptane 42—5 160.3
+3,3,5-Trimethylheptane 39 -3 152.3
+3,4,4-Trimethylheptane 43—5 159.4
+3,4,5-Trimethylheptane 40 -5 162.3
+2-Methyl-3-isopropylhexane 41 -4 155.8
+3,3-Diethylhexane 44 -6 163.9
+2,2-Dimethyl-3-ethylhexane 43 -4 153.9
+2,3-Dimethyl-3-ethylhexane 46 -6 161.9
+2,3-Dimethyl-4-ethylhexane 42 -5 160.3
+2,4-Dimethyl-3-ethylhexane 43—5 159.4
+2,4-Dimethyl-4-ethylhexane 43 -4 153.9
+2,5-Dimeth;yl-3-ethylhexane 38 -3 153.3
+3,3-Dimethyl-4-ethylhexane 47 -6 160.9
+3,4-Dimethyl-3-ethylhexane 48—7 165.5
+2,2,3,3-Tetramethylhexane 50 -6 158.0
+2,2,3,5-Tetramethylhexane 42 -3 149.3
+2,2,4,4-Tetramethylhexane 46 -2 139.9
+2,3,3,4-T etramethylhexane 50 -7 163.5
+2,3,3,5-Tetramethvlhexane 45 -4 151.9
+2,3,4,4-Tetramethylhexane 49 -6 159.0
+2,3,4,5-Tetramethvlhexane 44 -5 158.4
+3,3,4,4-Tetramethvlhexane 54 -8 165.1
+2,1 1Hmethyl -3-isopropylpentane 48 -5 154.5
+2 Ív V,y!;1! -1!ivi!:yl·,ivntane 51 -8 168.0
+2,2,3-Trimethyl 3-ethyIpeutune 55 -8 164.1
+2,2.4 Trimctliy!-3-ethylpentaiie 50—5 152.5
+2,3,4-Tnmethyl-3-ethylpentane 53 -8 166.1
+2,2,3,3,4-Pentamethylpentane 57 -8
+.162.1
+2,2,3,4,4-Pentamethylpentane 54—5 148.6
+Thepath number wwascalculated asthetotal
+distance between allcarbon atoms. The smaller
+thistotal distance, thelarger isthecompactnessofthemolecule. This means that asthe com-
+pactness increases, i.e., aswdecreases, theboiling
+point decreases, asisshown bywriting equation(Din theform
+ht98
+n2w+5.5p+c (7)frequency ofmolecular collisions will belessin
+the more compact oftwo isomers. As aresult,
+the more compact isomer willrequire lessheat to
+compensate forenergy losses due tomolecular
+collisions, andwilltherefore boil atalower tem-
+perature. The factor 1/n2 before thecompact-
+ness term indicates adamping effect ofmolecular
+weight.
+Thestructural number pmay beinterpreted as
+asemi-quantitative measure ofintramolecular
+attraction forces transmitted through thecarbon
+chain. The theory ofalternate polarities (Lap-
+worth) can beextended tonon-substituted par-
+affins, aswas done byCuy.10 If,then, alternate
+carbon atoms inachain tend toexhibit opposite
+polarities, andif,forpurposes ofapproximation,
+such chargesaretaken tobeofequal magnitude,
+then thetotal inductive attraction force between
+atoms ofopposite polarities isgiven byanexpres-
+sionoftheform kipi+k3p3+hpy··,where piis
+thenumber ofcarbon atoms onebond apart, p3
+thenumber three apart, etc. Clearly, the nu-
+merical values ofthecoefficients ki,k3, k-0,will de-
+crease strongly inthat order, asattraction forces
+will obeyaninverse-power, law. For any par-
+affin ofncarbon atoms, pi=n—1.Thedif-
+ference between theintramolecular attraction in
+two isomers reduces therefore tok3Ap3 +hAp3.
+As ks,issmall compared to k3,this isfurther
+simplified tok3Ap3. Inequation (4),this term-
+appearsas5.5Ap.
+-The alternating irregularity frequently ob-
+served inphysical and chemical properties of
+organic compounds may also benoted forthe
+boiling points in agroup ofparaffin isomers.
+When amethyl group, forexample, isdisplaced by
+single steps alongacarbon chain, theboiling
+points oftheresulting series ofisomers oscillate
+strongly. Asshown bytheexamples given below,
+this effect isclosely reproduced bythecalculated
+values. This phenomenon, therefore, may be
+traceable inpart totheantagonistic effects of
+thecompactness andofthepolarity factors.
+Series (a)
+c—c—c—c—c—c
+Ic
+c—c—c—c—c
+I Ic c
+c—c—c—c—c
+I Icc
+c
+c—c—c—c
+Ic
+C—C—c—c—c—c¿Bobs. ¿Bcaled.
+90.0 90.4
+80.5 82.4
+89.7 89.4
+79.2 78.4
+91.9 91.9
+The boiling point isseen tovary inversely with
+__
+compactness. Other factors being equal, the <io)cuy, this journal, 42,sos(1920).

@@ -1,0 +1,142 @@
+18 Harry Wiener Vol. 69
+The experimental data arereproduced bythis
+equation with anaverage deviation of0.5°.
+Table II
+Cpd. Aíobs.  w    /caIcd. Dev.
+ro-Butane 0.0 0 00.0 0.0
+2-Methylpropane 11.2 1 111.6-.4
+«-Pentane 0.0 0 00.0 .0
+2-Methylbutane 8.2 2 07.9 .3
+2,2-Dimethylpropane 26.6 4 226.7-.1
+«-Hexane 0.0 0 00.0 .0
+2-Methylpentane 8.5 3 08.2 .3
+3-Methylpentane 5.4 4-1 5.4 .0
+2,2-Dimethylbutane 19.0 7 019.0 .0
+2,3-Dimethylbutane 10.8 6-1 10.8 .0
+«-Heptane 0.0 0 00.0 .0
+2-Methylhexane 8.4 4 08.0 .4
+3-Methylhexane 6.5 6-1 6.5 .0
+3-Ethylpentane 5.0 8-2 5.0 .0
+2,2-Dimethylpentane 19.2 10 020.0-.8
+2,3-D imethylpentane 8.7 10 -2 9.0-.3
+2,4-Dimethylpentane 17.9 8 016.0 1.9
+3,3-Dimethylpentane 12.4 12 -2 13.0 -0.6
+2,2,3-Trimethylbutane 17.5 14 -2 17.0 .5
+«-Octane 0.0 0 00.0 .0
+2-Methylheptane 8.0 5 07.7 .3
+3-Methylheptane 6.7 8-1 6.7 .0
+4-Methylheptane 8.0 9-1 8.2-.2
+3-Ethylhexane 7.1 12 -2 7.3-.2
+2,2-Dimethylhexane 18.8 13 019.9 -1.1
+2,3-Dimethylhexane 10.1 14 -2 10.4 -0.3
+2,4-Dimethylhexane 16.2 13 -1 14.4 1.8
+2,5-Dimethylhexane 16.6 10 015.3 1.3
+3,3-Dimethylhexane 13.7 17-2 15.0 -1.3
+3,4-Dimethylhexane 8.0 16-3 8.0 0.0
+2-Methyl-3-ethylpentane 10.0 17-3 9.5 .5
+3-Methyl-3-ethylpentane 7.4 20 -4 8.6 -1.2
+2,2,3-Trimethylpentane 15.8 21 -3 15.7 0.1
+2,2,4-Trimethylpentaue 26.4 18 027.5 -1.1
+2,3,3-Trimethylpentane 10.9 22 -4 11.6 -0.7
+2,3,4-Triraethylpentane
+2,2,3,3-T etramethyl-12.2 19-3 12.5-3
+butane 19.4 26 -4 17.8 1.6
+Average deviation 0.47°
+InTable III, themethod isextended tothe
+boiling point data available forthe nonanes and
+the decanes. The observed boiling point values
+forthe nonanes comprise the complete setof
+values forthethirty-five nonanes given inA.P.I.
+Table 4a,3 omitting values forsixcompounds
+which were not based upon experimental data.5
+The observed boiling points ofthedecanes repre-
+sent individual determinations, obtained from
+thecompilations ofEgloff,6 Doss7 and Francis.8
+The average deviations are 1.26° fortwenty-
+nine nonanes, and 1.30° fortwenty-eight decanes.
+(5)Communication from Dr.Frederick D.Rossini.
+(6)Egloff, "Physical Constants oftheHydrocarbons.’’ Vol. I,
+Reinhold Publishing Corp., New York, N.Y.,1939.
+(7) Doss, "Physical Constants ofthePrincipal Hydrocarbons,”
+Fourth Edition, Texas Company, New York, N.Y., 1943.
+(8)Francis, Ind. Eng. Chem., 35,442 (1943).Table III
+Cpd. <ubs. Aw Ap *cal<’d. De V.
+«-Nonane 150.8 0 0 150.8 0.0
+2-Methyloctane 143.3 6 0 143 .5 _2
+3-Methyloctane 144.2 10 -1 144.2 .0
+4-MethyIoctane 142.5 12 -1 141.8_.7
+3-Ethylheptane 143.0 .16 _2 142 .5-
+.5
+4-EthyIheptane 141.2 18 -2 140.0 -1.2
+^,2-Dimethylheptane 130.5 16 0 131.4 0.9
+2,3-Dimethylheptane 140.5 18_2 140.0—
+.5
+2,4-Dimethylheptane 133 18 -1 134 .5 1 .5
+2,5-Dimethylheptane 136 16 -1 136.9 0.9
+2,6-Dimethylheptane 135.2 12 0 136.3 1.1
+3,3-Dimethylheptane 137.3 22 -2 135.2 -2.1
+3,4-Dimethylheptane 140.5 22 -3 140.7 0.2
+3,5-Dimethylheptane 20 -2 137.6
+4,4-Dimethylheptane 24 -2 132.8
+2-Methyl-3-ethylhexane 139 24 -3 138.3-
+.7
+2-Methyl-4-ethylhexane 22 -2 135.2
+3-Methyl-3-ethylhexane 28 -4 139,0
+3-Methyl-4-ethylhexane 26 -4 141.4
+2,2,3-Trimethylhexane 133.4 28—3 133.4 .0
+2,2,4-Trimethylhexane 126.5 26 -1 124 .8-1 .7
+2,2,5-Trimethylhexane 124.1 22 Ü 124.2 0 .1
+2,3,3-Trimethylhexane 138 30 -4 136 .5 -1 .5
+2,3,4-Trimethylhexane 28 -4 139.0
+2,3,5-Trimethylhexane 131.4 24~2 132.8 1.4
+2,4,4-Trimethylhexane 131 28—2 127.9 -3.1
+3,3,4-Trimethylhexane 139 32 -5 139,0 0.6
+3,3-Diethylpentane 146.5 32—6 145, .1 -1.4
+2,2-Dimethyl-3-ethylpentane 133.8 32 -4 134..1 0.3
+2,3-DimethyI-3-ethylpentane 142 34 -6 142. ,7 .7
+2,4-Dimethyl-3-ethylpentane 136.7 30—4 136, .0-
+..2
+2,2,3,3-Tetramethylpentane 140.2 38 -6 137..8 -2.4
+2,2,3,4-Tetramethylpentane 133.0 34 -4 131. ,7 -1.3
+2,2,4,4-Tetramethylpentane 122.3 32 0 112. 1 -10. .2
+2,3,3,4-Tetramethylpentane 141.5 36 -6 140. .2 -1..3
+«-Decane 174.0 0 0 174. 0 Ü..0
+2-Methytnonane 166.8 7 0 167. 1 .3
+3-Methylnonane 167.8 12-1 167. 7-
+,,1
+4-Methylnonane 165.7 15—1 164. 8-
+.9
+5-Methylnonane 165.1 10.-1 163. 8 -1..3
+2,4-Dimethyloctane 153.2 23 -1 157. 0 3..8
+2,5-Dimethyloctane 159 22 -1 157. 9 -1.,1
+2,6-Dimethyloctane 160 19 -1 160. 9 0..9
+2,7-Dimethyloctane 160.2 14 0 160. 3 .1
+3,3-Dimethyloctane 161.2 27—2 158. 5 -2. 7
+3,6-Dimethyloctane 160.8 24—2 161. 5 0.7
+4,5-Dimethyloctane 101.0 30 -3 161. 1 1
+4-w-Propylheptane 161.7 27 -2 158. 5 -3. 2
+4-Isopropylheptane 158.6 34 -3 157. 2 -1. 4
+2-Methyl-5-ethylheptane 158.4 27—2 158. 5 0.1
+3-Methyl-3-ethylheptane 156.3 36—4 160. 7 4.4
+2,2,4-Trimethylheptane 147 34 -1 146. 2 -0. 8
+2,2,6-Trimethylheptane 148.9 26 0 148. 5-
+.4
+2,3,3-Trimethylheptane 160 38 -4 158. 8 -1. 2
+2,3,6-T rimethylheptane 155.3 29 -2 156. 6 1.3
+2,4,4-Trimethylheptane 151 38 _2 147. 8 -3. 2
+2,4,6-Trimethylheptane 147.6 30 -1 150. 1 2,5
+2,5,5-Trimethylheptane 152.8 34 -2 lot. 7-1 .1
+3,4-DiethyIhexane 160.7 40—5 162. 3 1.6
+2,2-Dimethyl-4-ethylhexane 148 39—2 146. S -1. 2
+2,2,3,4-Tetramethylhexane 156.5 47—5 155. 4 -1. 1
+2,2,4,5-T etrame thy! hexane 145.8 41 -2 144. 8 -1. 0
+2,2,5,5-TetramethyIhexane 136.8 38 0 136. 8 0.0
+The average deviation forallninety-four com-
+pounds is0.97°.9
+For the nonanes, acomplete setofpredicted
+boiling points isgiven inTable III. Table IV
+lists thepredicted boiling points forthe 47dec-
+anes which donotappear inTable III.
+(9)These average deviations» were obtained disregarding sign;
+considering sign, the average deviation forthe 94compounds is
+-0.27°.
