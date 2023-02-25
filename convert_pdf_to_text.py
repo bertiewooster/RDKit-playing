@@ -94,7 +94,7 @@ ignore_line_chars = (".", ",")
 
 # for line in content:
 # Temporarily cutting down dataset size during coding
-for line in content[0:2]:
+for line in content[0:3]:
     if line[0] not in ignore_line_chars:
         end_marker = "ane "
         end_of_molecule = line.find(end_marker) + len(end_marker)
@@ -133,10 +133,12 @@ df = df.with_columns([
 df = df.with_columns([
     pl.col('mol').apply(lambda m: Chem.MolToSmiles(m)).alias('CanonicalSMILES'),
     pl.col('mol').apply(lambda m: Descriptors.MolWt(m)).alias('MolWt'),
-    pl.col('mol').apply(lambda m: wiener_index(m)).alias('omega0'),
-    pl.col('mol').apply(lambda m: CalculatePolarityNumber(m)).alias('p0'),
+    pl.col('mol').apply(lambda m: wiener_index(m)).alias('omega'),
+    pl.col('mol').apply(lambda m: CalculatePolarityNumber(m)).alias('p'),
     pl.col('mol').apply(lambda m: m.GetNumAtoms()).alias('n'),
 ])
+
+print(df)
 
 linear_alkanes = pl.DataFrame({"compound": ["n-Butane", "n-Pentane", "n-Hexane", "n-Heptane", "n-Octane", "n-Nonane", "n-Decane", "n-Undecane", "n-Dodecane"], 
                           "t0": [-0.5, 36.1, 68.7, 98.4, 125.7, 150.8, 174.0, 195.8, 216.2],
@@ -146,10 +148,22 @@ linear_alkanes = pl.DataFrame({"compound": ["n-Butane", "n-Pentane", "n-Hexane",
                           "p0": [1, 2, 3, 4, 5, 6, 7, 8, 9],
                           })
 
-omega0_n_hexane = linear_alkanes.filter(pl.col("n") == 6).select(["omega0"])
-n_hexane_omega0_p0 = linear_alkanes.filter(pl.col("n") == 6).select(["omega0", "p0"])
+print(linear_alkanes)
 
-# Copy in values from corresponding straight-chain alkane
+# Join to copy in values from corresponding straight-chain alkane
+df = df.join(linear_alkanes, on="n", how="inner", suffix="_lin_alkane")
+
+# Calculate delta omega, p values
+df = df.with_columns([
+    pl.struct(["omega", "omega0"]).apply(lambda x: x["omega0"] - x["omega"]).alias("delta_omega"),
+    pl.struct(["p", "p0"]).apply(lambda x: x["p0"] - x["p"]).alias("delta_p"),
+])
+
+# Calculate delta t
+# df = df.with_columns([
+#     pl.struct(["n", "delta_omega", "delta_p"]).apply(lambda x: calc_delta_t(x["n"], x["delta_omega"], x["delta_p"])).alias("delta_t"),
+# ])
+
 # df = df.with_columns([
 #     pl.col('n').apply(lambda s: Chem.MolFromSmiles(s)).alias('mol'),
 # ])
