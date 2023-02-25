@@ -72,7 +72,7 @@ def get_canonical_smiles(name):
         print(f"  {name} {compound.canonical_smiles}")
         # if compound.canonical_smiles == "null":
         #     print(f"  {name} returned Null for canonical_smiles")
-        time.sleep(0.2)
+        time.sleep(0.1)
         return compound.canonical_smiles
 
 # Fix data from tables
@@ -108,10 +108,12 @@ for line in content:
         tobs = words[0]
         # print(f"{molecule_clean} {tobs}")
         molecules.append(no_spaces_in_molecule)
-        tobss.append(tobs)
+        tobss.append(float(tobs))
 
 df = pl.DataFrame({"molecules": molecules,
-                          "tobss": tobss})
+                        #   "tobss": tobss, # For table III
+                          "delta_tobss": tobss, # For table II
+                          })
 
 print(df)
 
@@ -170,22 +172,11 @@ df = df.with_columns([
     pl.struct(["n", "delta_omega", "delta_p"]).apply(lambda x: calc_delta_t(x["n"], x["delta_omega"], x["delta_p"])).alias("delta_t"),
 ])
 
-# df = df.with_columns([
-#     pl.col('n').apply(lambda s: Chem.MolFromSmiles(s)).alias('mol'),
-# ])
-
-# Calculate delta t values
-# df = df.with_columns([
-#     pl.struct(["n", "delta_omega", "delta_p"]).apply(lambda x: calc_delta_t(x["n"], x["delta_omega"], x["delta_p"])).alias("delta_t"),
-# ])
+# Calculate deviation in delta t: obs - calc
+df = df.with_columns([
+    pl.struct(["delta_tobss", "delta_t"]).apply(lambda x: x["delta_tobss"] - x["delta_t"]).alias("Dev"),
+])
 
 print(df)
 
 
-# smiless = []
-# mols = []
-# wieners = []
-# polarities = []
-
-# for mol in mols:
-#     wieners = 
