@@ -72,7 +72,7 @@ def get_canonical_smiles(name):
         print(f"  {name} {compound.canonical_smiles}")
         # if compound.canonical_smiles == "null":
         #     print(f"  {name} returned Null for canonical_smiles")
-        time.sleep(0.1)
+        time.sleep(0.01) # 0.01 second delay seems sufficient for PUG REST to not give Server Busy
         return compound.canonical_smiles
 
 # Fix data from tables
@@ -178,5 +178,3 @@ df = df.with_columns([
 ])
 
 print(df)
-
-
