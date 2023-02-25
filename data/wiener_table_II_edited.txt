@@ -33,5 +33,5 @@ ro-Butane 0.0 0 00.0 0.0
 2,2,3-Trimethylpentane 15.8 21 -3 15.7 0.1
 2,2,4-Trimethylpentaue 26.4 18 027.5 -1.1
 2,3,3-Trimethylpentane 10.9 22 -4 11.6 -0.7
-2,3,4-Triraethylpentane
-2,2,3,3-T etramethyl-butane 12.2 19-3 12.5-3
+2,3,4-Triraethylpentane 12.2 19-3 12.5-3
+2,2,3,3-T etramethyl-butane 19.4 26 -4 17.8 1.6

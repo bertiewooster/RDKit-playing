@@ -67,11 +67,12 @@ def calc_delta_t(n, delta_omega, delta_p):
 delta_t = calc_delta_t(8, 26, -4) # should give 17.8; does
 
 def get_canonical_smiles(name):
+    print(name)
     for compound in pcp.get_compounds(name, 'name'):
-        print(f"{name} {compound.canonical_smiles}")
+        print(f"  {name} {compound.canonical_smiles}")
         # if compound.canonical_smiles == "null":
         #     print(f"  {name} returned Null for canonical_smiles")
-        # time.sleep(0.5)
+        time.sleep(0.2)
         return compound.canonical_smiles
 
 # Fix data from tables
@@ -83,29 +84,30 @@ def get_canonical_smiles(name):
 molecules = []
 tobss = []
 
-with open("data/wiener_table_III_edited.txt") as f:
+# with open("data/wiener_table_III_edited.txt") as f:
+with open("data/wiener_table_II_edited.txt") as f:
     content = f.readlines()
 
 # Show the file contents line by line.
 # We added the comma to print single newlines and not double newlines.
 # This is because the lines contain the newline character '\n'.
 ignore_line_chars = (".", ",")
-# for line in content:
 
-# for line in content:
+for line in content:
 # Temporarily cutting down dataset size during coding
-for line in content[0:3]:
+# for line in content[3:7]:
     if line[0] not in ignore_line_chars:
+        if "2,2" in line:
+            pass
+        line_clean = line.replace("«", "n").replace("^", "2").replace("!", "l").replace("Ihexane", "lhexane").replace("Ioctane", "loctane").replace("Iheptane", "lheptane").replace("ro", "n").replace("pnpane", "propane").replace("pentaue","pentane").replace("raethyl", "methyl")
         end_marker = "ane "
-        end_of_molecule = line.find(end_marker) + len(end_marker)
-        no_spaces_in_molecule = line[:end_of_molecule].replace(" ", "")
+        end_of_molecule = line_clean.find(end_marker) + len(end_marker)
+        no_spaces_in_molecule = line_clean[:end_of_molecule].replace(" ", "")
         # print(f"{no_spaces_in_molecule=}")
-        molecule_clean = no_spaces_in_molecule.replace("«", "n").replace("^", "2").replace("!", "l").replace("Ihexane", "lhexane").replace("Ioctane", "loctane").replace("Iheptane", "lheptane")
-
-        words = line[end_of_molecule:].split()
+        words = line_clean[end_of_molecule:].split()
         tobs = words[0]
         # print(f"{molecule_clean} {tobs}")
-        molecules.append(molecule_clean)
+        molecules.append(no_spaces_in_molecule)
         tobss.append(tobs)
 
 df = pl.DataFrame({"molecules": molecules,
@@ -113,8 +115,10 @@ df = pl.DataFrame({"molecules": molecules,
 
 print(df)
 
+# Debugging: Print molecule names
 # print(df["molecules"])
 
+# Debugging: Print molecule names and SMILES
 # for molecule in df["molecules"]:
 #     s = get_canonical_smiles(molecule)
 #     if s == "null":
@@ -124,11 +128,13 @@ df = df.with_columns([
     pl.col('molecules').apply(lambda s: get_canonical_smiles(s)).alias('SMILES'),
 ])
 
-# print(df)
+print(df)
 
 df = df.with_columns([
     pl.col('SMILES').apply(lambda s: Chem.MolFromSmiles(s)).alias('mol'),
 ])
+
+print(df)
 
 df = df.with_columns([
     pl.col('mol').apply(lambda m: Chem.MolToSmiles(m)).alias('CanonicalSMILES'),
@@ -160,9 +166,9 @@ df = df.with_columns([
 ])
 
 # Calculate delta t
-# df = df.with_columns([
-#     pl.struct(["n", "delta_omega", "delta_p"]).apply(lambda x: calc_delta_t(x["n"], x["delta_omega"], x["delta_p"])).alias("delta_t"),
-# ])
+df = df.with_columns([
+    pl.struct(["n", "delta_omega", "delta_p"]).apply(lambda x: calc_delta_t(x["n"], x["delta_omega"], x["delta_p"])).alias("delta_t"),
+])
 
 # df = df.with_columns([
 #     pl.col('n').apply(lambda s: Chem.MolFromSmiles(s)).alias('mol'),
