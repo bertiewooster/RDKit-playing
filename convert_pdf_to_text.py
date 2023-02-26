@@ -1,4 +1,5 @@
 import asyncio
+import math
 import re
 import ssl
 import time
@@ -27,7 +28,7 @@ def wiener_index(m):
     for i in range(num_atoms):
         for j in range(i+1, num_atoms):
             res += amat[i][j]
-    return res
+    return int(res)
 
 def CalculatePolarityNumber(mol):
     """
@@ -54,7 +55,7 @@ def CalculatePolarityNumber(mol):
     #################################################################
     """
     Distance = Chem.GetDistanceMatrix(mol)
-    res = 1./2*sum(sum(Distance==3))
+    res = int(1./2*sum(sum(Distance==3)))
     
     return res
 
@@ -62,9 +63,8 @@ def CalculatePolarityNumber(mol):
 def calc_delta_t(n, delta_omega, delta_p):
     return (98/(n**2) * delta_omega) + (5.5 * delta_p)
 
-# delta_t = calc_delta_t(4, 1, 1) # should give 11.625; does
-# delta_t = calc_delta_t(8, 26, -4) # should give 17.8; does
-delta_t = calc_delta_t(8, 26, -4) # should give 17.8; does
+def egloff(n):
+  return 745.42 * math.log10(n + 4.4) - 689.4
 
 def get_canonical_smiles(name):
     print(name)
@@ -93,9 +93,9 @@ with open("data/wiener_table_II_edited.txt") as f:
 # This is because the lines contain the newline character '\n'.
 ignore_line_chars = (".", ",")
 
-for line in content:
+# for line in content:
 # Temporarily cutting down dataset size during coding
-# for line in content[3:7]:
+for line in content[3:7]:
     if line[0] not in ignore_line_chars:
         if "2,2" in line:
             pass
@@ -112,10 +112,10 @@ for line in content:
 
 df = pl.DataFrame({"molecules": molecules,
                         #   "tobss": tobss, # For table III
-                          "delta_tobss": tobss, # For table II
+                          "delta_t_obs": tobss, # For table II
                           })
 
-print(df)
+# print(df)
 
 # Debugging: Print molecule names
 # print(df["molecules"])
@@ -130,7 +130,7 @@ df = df.with_columns([
     pl.col('molecules').apply(lambda s: get_canonical_smiles(s)).alias('SMILES'),
 ])
 
-print(df)
+# print(df)
 
 df = df.with_columns([
     pl.col('SMILES').apply(lambda s: Chem.MolFromSmiles(s)).alias('mol'),
@@ -149,12 +149,18 @@ df = df.with_columns([
 print(df)
 
 linear_alkanes = pl.DataFrame({"compound": ["n-Butane", "n-Pentane", "n-Hexane", "n-Heptane", "n-Octane", "n-Nonane", "n-Decane", "n-Undecane", "n-Dodecane"], 
-                          "t0": [-0.5, 36.1, 68.7, 98.4, 125.7, 150.8, 174.0, 195.8, 216.2],
+                          "t0_obs": [-0.5, 36.1, 68.7, 98.4, 125.7, 150.8, 174.0, 195.8, 216.2],
                           "SMILES": ["CCCC", "CCCCC", "CCCCCC", "CCCCCCC", "CCCCCCCC", "CCCCCCCCC", "CCCCCCCCCC", "CCCCCCCCCCC", "CCCCCCCCCCCC"],
                           "n": [4, 5, 6, 7, 8, 9, 10, 11, 12],
                           "omega0": [10, 20, 35, 56, 84, 120, 165, 220, 286],
                           "p0": [1, 2, 3, 4, 5, 6, 7, 8, 9],
                           })
+
+linear_alkanes = linear_alkanes.with_columns([
+    pl.col('n').apply(lambda n: egloff(n)).alias('t0_calc'),
+    # pl.col('mol').apply(lambda m: wiener_index(m)).alias('omega0'),
+    # pl.col('mol').apply(lambda m: CalculatePolarityNumber(m)).alias('p0'),
+])
 
 print(linear_alkanes)
 
@@ -169,12 +175,22 @@ df = df.with_columns([
 
 # Calculate delta t
 df = df.with_columns([
-    pl.struct(["n", "delta_omega", "delta_p"]).apply(lambda x: calc_delta_t(x["n"], x["delta_omega"], x["delta_p"])).alias("delta_t"),
+    pl.struct(["n", "delta_omega", "delta_p"]).apply(lambda x: calc_delta_t(x["n"], x["delta_omega"], x["delta_p"])).alias("delta_t_calc"),
 ])
 
-# Calculate deviation in delta t: obs - calc
 df = df.with_columns([
-    pl.struct(["delta_tobss", "delta_t"]).apply(lambda x: x["delta_tobss"] - x["delta_t"]).alias("Dev"),
+    # Calculate deviation in delta t: obs - calc
+    pl.struct(["delta_t_obs", "delta_t_calc"]).apply(lambda x: x["delta_t_obs"] - x["delta_t_calc"]).alias("Dev"),
+    # Calculate t_calc
+    pl.struct(["t0_calc", "delta_t_calc"]).apply(lambda x: x["t0_calc"] - x["delta_t_calc"]).alias("t_calc"),
+    # Calculate t_obs
+    pl.struct(["t0_obs", "delta_t_obs"]).apply(lambda x: x["t0_obs"] - x["delta_t_obs"]).alias("t_obs"),
 ])
 
 print(df)
+
+row = df.filter(pl.col("molecules") == "2,2-Dimethylpropane")
+row_t = row.select(["molecules", "SMILES", "t0_obs", "t0_calc", "delta_t_obs", "delta_t_calc", "t_obs", "t_calc"])
+print(row_t)
+
+# print(df[0]["delta_t_obs"])
