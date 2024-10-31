@@ -1,0 +1,5 @@
+For chemistry groups:
+#Chemical elements come in different isotopes, for example carbon-12 and -13, that have different weights. When you assemble atoms of those atoms into a molecule, there's an even richer distribution. This blog post presents an easy-to-code way to enumerate molecular #isotopes and their weights using #Python #RDKit. #chemistry #RealTimeChem #cheminformatics
+
+For Python groups:
+Use permutations to enumerate all the options for arranging items in order. Here's an example of using #Python go generate each permutation, then grouping them to remove their order as a concern. #informatics

@@ -93,9 +93,9 @@ with open("data/wiener_table_II_edited.txt") as f:
 # This is because the lines contain the newline character '\n'.
 ignore_line_chars = (".", ",")
 
-# for line in content:
+for line in content:
 # Temporarily cutting down dataset size during coding
-for line in content[3:7]:
+# for line in content[3:7]:
     if line[0] not in ignore_line_chars:
         if "2,2" in line:
             pass
@@ -189,8 +189,8 @@ df = df.with_columns([
 
 print(df)
 
-row = df.filter(pl.col("molecules") == "2,2-Dimethylpropane")
+# Debugging: Print key t values for one molecule
+row = df.filter(pl.col("molecules") == "2,3,4-Trimethylpentane")
 row_t = row.select(["molecules", "SMILES", "t0_obs", "t0_calc", "delta_t_obs", "delta_t_calc", "t_obs", "t_calc"])
 print(row_t)
 
-# print(df[0]["delta_t_obs"])
