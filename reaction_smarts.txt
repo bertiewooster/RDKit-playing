@@ -1,0 +1,49 @@
+Atoms:
+	0 6 C chg: 0  deg: 2 exp: N/A imp: N/A hyb:  arom?: 1 query: AtomType
+	1 0 * chg: 0  deg: 2 exp: N/A imp: N/A hyb:  mapno: 1 query: AtomTotalDegree
+	2 6 C chg: 0  deg: 2 exp: N/A imp: N/A hyb:  arom?: 1 mapno: 2 query: AtomType
+	3 6 C chg: 0  deg: 2 exp: N/A imp: N/A hyb:  arom?: 1 mapno: 3 query: AtomType
+	4 6 C chg: 0  deg: 4 exp: N/A imp: N/A hyb:  mapno: 4 query: AtomType
+	5 6 C chg: 0  deg: 3 exp: N/A imp: N/A hyb:  mapno: 5 query: AtomType
+	6 6 C chg: 0  deg: 2 exp: N/A imp: N/A hyb:  mapno: 6 query: AtomType
+	7 6 C chg: 0  deg: 2 exp: N/A imp: N/A hyb:  arom?: 1 mapno: 7 query: AtomType
+	8 6 C chg: 0  deg: 2 exp: N/A imp: N/A hyb:  arom?: 1 mapno: 8 query: AtomType
+	9 6 C chg: 0  deg: 1 exp: N/A imp: N/A hyb:  arom?: 1 mapno: 9 query: AtomType
+	10 6 C chg: 0  deg: 3 exp: N/A imp: N/A hyb:  arom?: 1 mapno: 10 query: AtomType
+	11 6 C chg: 0  deg: 3 exp: N/A imp: N/A hyb:  arom?: 1 mapno: 11 query: AtomType
+	12 6 C chg: 0  deg: 2 exp: N/A imp: N/A hyb:  arom?: 1 mapno: 12 query: AtomType
+	13 6 C chg: 0  deg: 2 exp: N/A imp: N/A hyb:  arom?: 1 mapno: 13 query: AtomType
+	14 6 C chg: 0  deg: 2 exp: N/A imp: N/A hyb:  arom?: 1 mapno: 14 query: AtomType
+	15 6 C chg: 0  deg: 2 exp: N/A imp: N/A hyb:  arom?: 1 mapno: 15 query: AtomType
+	16 6 C chg: 0  deg: 3 exp: N/A imp: N/A hyb:  arom?: 1 mapno: 16 query: AtomType
+	17 6 C chg: 0  deg: 3 exp: N/A imp: N/A hyb:  arom?: 1 mapno: 17 query: AtomType
+	18 6 C chg: 0  deg: 2 exp: N/A imp: N/A hyb:  arom?: 1 mapno: 18 query: AtomType
+	19 6 C chg: 0  deg: 2 exp: N/A imp: N/A hyb:  arom?: 1 mapno: 19 query: AtomType
+	20 6 C chg: 0  deg: 2 exp: N/A imp: N/A hyb:  arom?: 1 mapno: 20 query: AtomType
+	21 6 C chg: 0  deg: 2 exp: N/A imp: N/A hyb:  arom?: 1 mapno: 21 query: AtomType
+Bonds:
+	0 0->1 order: 1
+	1 1->2 order: 1
+	2 2->3 order: a aromatic?: 1
+	3 3->4 order: 1
+	4 4->5 order: 1
+	5 5->6 order: 1
+	6 6->7 order: 1
+	7 7->8 order: a aromatic?: 1
+	8 8->9 order: a aromatic?: 1
+	9 4->10 order: 1
+	10 10->11 order: a aromatic?: 1
+	11 11->12 order: a aromatic?: 1
+	12 12->13 order: a aromatic?: 1
+	13 13->14 order: a aromatic?: 1
+	14 14->15 order: a aromatic?: 1
+	15 11->16 order: a aromatic?: 1
+	16 16->17 order: a aromatic?: 1
+	17 17->18 order: a aromatic?: 1
+	18 18->19 order: a aromatic?: 1
+	19 19->20 order: a aromatic?: 1
+	20 20->21 order: a aromatic?: 1
+	21 17->4 order: 1
+	22 15->10 order: a aromatic?: 1
+	23 21->16 order: a aromatic?: 1
+	24 5->0 order: 1
