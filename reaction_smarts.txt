@@ -1,5 +1,5 @@
 Atoms:
-	0 6 C chg: 0  deg: 2 exp: N/A imp: N/A hyb:  arom?: 1 query: AtomType
+	0 6 C chg: 0  deg: 3 exp: N/A imp: N/A hyb:  arom?: 1 query: AtomType
 	1 0 * chg: 0  deg: 2 exp: N/A imp: N/A hyb:  mapno: 1 query: AtomTotalDegree
 	2 6 C chg: 0  deg: 2 exp: N/A imp: N/A hyb:  arom?: 1 mapno: 2 query: AtomType
 	3 6 C chg: 0  deg: 2 exp: N/A imp: N/A hyb:  arom?: 1 mapno: 3 query: AtomType
@@ -8,7 +8,7 @@ Atoms:
 	6 6 C chg: 0  deg: 2 exp: N/A imp: N/A hyb:  mapno: 6 query: AtomType
 	7 6 C chg: 0  deg: 2 exp: N/A imp: N/A hyb:  arom?: 1 mapno: 7 query: AtomType
 	8 6 C chg: 0  deg: 2 exp: N/A imp: N/A hyb:  arom?: 1 mapno: 8 query: AtomType
-	9 6 C chg: 0  deg: 1 exp: N/A imp: N/A hyb:  arom?: 1 mapno: 9 query: AtomType
+	9 6 C chg: 0  deg: 2 exp: N/A imp: N/A hyb:  arom?: 1 mapno: 9 query: AtomType
 	10 6 C chg: 0  deg: 3 exp: N/A imp: N/A hyb:  arom?: 1 mapno: 10 query: AtomType
 	11 6 C chg: 0  deg: 3 exp: N/A imp: N/A hyb:  arom?: 1 mapno: 11 query: AtomType
 	12 6 C chg: 0  deg: 2 exp: N/A imp: N/A hyb:  arom?: 1 mapno: 12 query: AtomType
@@ -47,3 +47,4 @@ Bonds:
 	22 15->10 order: a aromatic?: 1
 	23 21->16 order: a aromatic?: 1
 	24 5->0 order: 1
+	25 9->0 order: a aromatic?: 1
