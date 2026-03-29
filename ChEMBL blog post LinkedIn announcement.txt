@@ -1,0 +1,15 @@
+New Blog Post: Prioritizing Drug-Like 💊 ChEMBL Compounds Within Target 🎯 Profiles
+
+Read my latest deep dive into leveraging the ChEMBL bioactivity database for compound prioritization in virtual screening workflows.
+
+In this post, I go through how to use the #Python ChEMBL API and #SQLite to:
+• Retrieve compound and target activity data programmatically
+• Build a local database of molecules and their associated targets
+• Rank compounds based on Lipinski Rule of Five violations
+• Analyze target profiles to inform screening decisions
+
+Whether you’re working in computational chemistry, medicinal chemistry, or cheminformatics, the techniques shown here can help you filter and prioritize compounds more effectively using open bioactivity data. 
+
+Read the full post and get the code at https://lnkd.in/eEVyzG3M. Marimo and Jupyter notebooks available for download!
+
+#cheminformatics #drugDiscovery #python #ChEMBL #bioinformatics #chemistry #medChem #medicinalChemistry
